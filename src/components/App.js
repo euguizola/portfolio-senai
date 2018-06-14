@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../assets/css/App.css';
 import Header from './Header';
 
+// Magic
+import '../assets/magic'
+
 // Pictures import
 import ecub from '../assets/images/projects/ecub.png'
 import code from '../assets/images/projects/code.png'
@@ -50,9 +53,12 @@ class App extends Component {
             {this.state.projects.map((project, i) => {
               return (
               <div className="project">
-                <div className="thumb">
-                  <img src={project.picture}></img>
+                <div className="thumb-mask">
+                  <div className="thumb" style={{backgroundImage: "url("+project.picture+")"}}></div>
                 </div>
+                <div className="identity">
+                  <h1>{i+1}</h1>  
+                </div> 
               </div>
               )
             })}
