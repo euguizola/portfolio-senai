@@ -1,0 +1,99 @@
+.header {
+  width: 100%;
+  padding: 50px 0;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header nav a {
+  color: #808080;
+  text-decoration: none;
+  padding: 0 20px;
+  text-align: right;
+  display: inline-flex;
+  flex-direction: column;
+  font-size: 18px;
+}
+
+.header nav a.current{
+  color: black;
+}
+
+.header nav a .selector {
+  background-color: #808080;
+  width: 30px;
+  height: 3px;
+  margin: auto;
+  transform: scale(0,1);
+  transition: all 0.2s ease;
+}
+
+.header nav a:hover .selector {
+  background-color: #808080;
+  width: 30px;
+  height: 3px;
+  margin: auto;
+  transform: scale(1,1);
+}
+
+.header nav a.current .selector {
+  background-color: black;
+  width: 30px;
+  height: 3px;
+  margin: auto;
+  transform: scale(1,1);
+}
+
+.header img {
+  min-width: 100px;
+}
+
+.container {
+  max-width: 1280px;
+  width: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.app {
+  background-image: url("../images/bg.jpg");
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#projects {
+  display: flex;
+}
+
+#projects .project {
+  padding: 10px 0;
+  width: 100%;
+  min-width: 100%;
+  max-width: 1280px;
+  margin-right: 40px;
+}
+
+.project .thumb {
+  width: 100%;
+}
+
+.project .thumb img{
+  width: 100%;
+}
+
+.icon {
+  max-width: 25px;
+  height: 25px;
+}
+
+.icon img {
+  width: 25px;
+  height: 25px;
+  max-width: 25px;
+  max-height: 25px;
+}
