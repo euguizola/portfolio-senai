@@ -54,10 +54,12 @@ class App extends Component {
               return (
               <div className="project">
                 <div className="thumb-mask">
+                  <div className="white-backgroud"></div>
                   <div className="thumb" style={{backgroundImage: "url("+project.picture+")"}}></div>
                 </div>
                 <div className="identity">
                   <h1>{i+1}</h1>  
+                  <h2>{project.name}</h2>
                 </div> 
               </div>
               )
