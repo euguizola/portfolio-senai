@@ -12,22 +12,31 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      active: 0,
       projects: [
         {
           name: "code[xp]",
-          picture: code
+          picture: code,
+          type: "Identidade Visual",
+          date: "2016"
         },
         {
           name: "uplab",
-          picture: uplab
+          picture: uplab,
+          type: "Identidade Visual",
+          date: "2017"
         },
         {
           name: "s.play",
-          picture: splay
+          picture: splay,
+          type: "Identidade Visual",
+          date: "2017"
         },
         {
           name: "e.cub",
-          picture: ecub
+          picture: ecub,
+          type: "Identidade Visual",
+          date: "2016"
         } 
       ]
     }
@@ -36,16 +45,24 @@ class App extends Component {
     return (
       <div className="app">
         <Header></Header>
-        <div className="container" id="projects">
-          {this.state.projects.map((project, i) => {
-            return (
-            <div className="project">
-              <div className="thumb">
-                <img src={project.picture}></img>
-               </div>
+        <div className="container">
+          <div id="projects">
+            {this.state.projects.map((project, i) => {
+              return (
+              <div className="project">
+                <div className="thumb">
+                  <img src={project.picture}></img>
+                </div>
+              </div>
+              )
+            })}
+          </div>
+          <div className="bottom">
+            <div className="about-project">
+              <span className="type">{this.state.projects[this.state.active].type}</span> .
+              <span className="when"> {this.state.projects[this.state.active].date}</span>
             </div>
-            )
-          })}
+          </div>
         </div>
       </div>
     );

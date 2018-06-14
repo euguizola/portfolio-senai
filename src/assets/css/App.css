@@ -86,6 +86,14 @@
   width: 100%;
 }
 
+.bottom {
+  font-size: 18px;
+}
+
+.when {
+ color: #808080;
+}
+
 .icon {
   max-width: 25px;
   height: 25px;
