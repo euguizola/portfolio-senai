@@ -21,8 +21,8 @@ window.addEventListener('load', ()=>{
     document.querySelector('.app').addEventListener('mousedown', (e) => {
         document.querySelector('.app').addEventListener('mousemove', horizontalNavigation)
 
-        t1 = TweenMax.to(".project", 0.5, {"min-width":"70%", width: "70%", "margin-right": "5px"})
-        t2 = TweenMax.to(".thumb-mask", 0.3, {width: "80%", filter: "grayscale(100%) brightness(1.2)", "box-shadow":"4px 4px 6px rgba(0,0,0,0.06), -4px -4px 6px rgba(0,0,0,0.06)"})
+        t1 = TweenMax.to(".project", 0.5, {"min-width":"100%", width: "100%"})
+        t2 = TweenMax.to(".thumb-mask", 0.3, {width: "70%", filter: "grayscale(100%) brightness(1.2)", "box-shadow":"4px 4px 6px rgba(0,0,0,0.06), -4px -4px 6px rgba(0,0,0,0.06)"})
         t3 = TweenMax.to(".thumb", 0.5, {"opacity": 0.3})
         t4 = TweenMax.to(".identity", 0.5, {opacity: 1})
         t5 = TweenMax.to(".identity h1", 0.8, {"transform":"translateX(0)"})
@@ -34,8 +34,10 @@ window.addEventListener('load', ()=>{
 
     document.querySelector('.app').addEventListener('mouseup', (e) => {
         document.querySelector('.app').removeEventListener("mousemove", horizontalNavigation)
-        if( ((translate * -1) % projectQuantity) !== 0 ){
-        }
+        // if((translate * -1) % projectWidth > 0) {
+        //     translate += ((translate * -1) % projectWidth) + 40
+        //     document.querySelector('#projects').style.transform = "translateX("+(translate)+"px)"
+        // }
         t1.reverse()
         t2.reverse()
         t3.reverse()
@@ -46,19 +48,19 @@ window.addEventListener('load', ()=>{
     })
 
     function horizontalNavigation(e) {
+
         totalWidth = 0
         projectQuantity = 0
+
         document.querySelectorAll('.project').forEach(project => {
             projectWidth = project.clientWidth
-            totalWidth += project.clientWidth
+            totalWidth += project.clientWidth + 40
             projectQuantity++
         })
-        let nextTranslate = translate + e.movementX
-        if(nextTranslate > ((totalWidth * -1) + projectWidth) && nextTranslate < 0){
-            translate = nextTranslate
-        }
-        // translate += (e.movementX * quantity)
-        document.querySelector('#projects').style.transform = "translateX("+(translate)+"px)"
+
+        let percentMouse = e.pageX * 100 / document.querySelector('body').clientWidth
+        let offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidth
+        document.querySelector('#projects').style.transform = "translateX(-"+offset+"px)"
     }
 
 })
