@@ -3,10 +3,10 @@ import TweenMax from 'gsap/src/uncompressed/TweenMax';
 import TimelineMax from 'gsap/src/uncompressed/TimelineMax';
 import { Back } from 'gsap';
 
-var translate = 0
 var projectQuantity = 0
 var totalWidth = 0
 var projectWidth = 0
+var offset = 0
 
 window.addEventListener('load', ()=>{
     let t1
@@ -34,10 +34,9 @@ window.addEventListener('load', ()=>{
 
     document.querySelector('.app').addEventListener('mouseup', (e) => {
         document.querySelector('.app').removeEventListener("mousemove", horizontalNavigation)
-        // if((translate * -1) % projectWidth > 0) {
-        //     translate += ((translate * -1) % projectWidth) + 40
-        //     document.querySelector('#projects').style.transform = "translateX("+(translate)+"px)"
-        // }
+        if(projectWidth % offset != 0){
+            console.log(projectWidth % offset)
+        }
         t1.reverse()
         t2.reverse()
         t3.reverse()
@@ -53,13 +52,13 @@ window.addEventListener('load', ()=>{
         projectQuantity = 0
 
         document.querySelectorAll('.project').forEach(project => {
-            projectWidth = project.clientWidth
+            projectWidth = project.clientWidth + 40
             totalWidth += project.clientWidth + 40
             projectQuantity++
         })
 
         let percentMouse = e.pageX * 100 / document.querySelector('body').clientWidth
-        let offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidth
+        offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidth
         document.querySelector('#projects').style.transform = "translateX(-"+offset+"px)"
     }
 
