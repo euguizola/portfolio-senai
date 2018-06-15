@@ -40,7 +40,7 @@ class App extends Component {
           picture: ecub,
           type: "Identidade Visual",
           date: "2016"
-        } 
+        },
       ]
     }
   }

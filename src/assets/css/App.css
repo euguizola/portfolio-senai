@@ -72,6 +72,7 @@
 
 #projects {
   display: flex;
+  user-select: none;
 }
 
 #projects .project {
@@ -130,6 +131,7 @@
   stroke: 2px #d4145a;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #d4145a;
+  transform: translateX(-30px);
 }
 
 .project .identity h2 {
@@ -138,6 +140,7 @@
   color: black;
   font-size: 10vh;
   margin-left: -20%;
+  transform: translateY(30px);
 }
 
 .bottom {
