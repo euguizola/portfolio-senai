@@ -35,9 +35,16 @@ window.addEventListener('load', ()=>{
     document.querySelector('.app').addEventListener('mouseup', (e) => {
         document.querySelector('.app').removeEventListener("mousemove", horizontalNavigation)
         if(projectWidth % offset != 0){
-            document.querySelectorAll('.project').forEach(project => {
-                console.log(project)
-            })
+            let last
+            let maior
+            let projects = document.querySelectorAll('.project')
+            for (let i = 0 ; i < projects.length ; i++) {
+                if(projects[i].offsetLeft * -1 < offset) {
+                    offset = projects[i].offsetLeft * -1
+                    i = projects.length + 1
+                }
+            }
+            document.querySelector('#projects').style.transform = "translateX("+offset+"px)"
         }
         t1.reverse()
         t2.reverse()
@@ -65,7 +72,11 @@ window.addEventListener('load', ()=>{
         if(offset + mouseScreen < 0 && offset + mouseScreen > (totalWidth * -1) + projectWidth){
             offset += mouseScreen 
         }
+
+        let bg = (offset / 100) * -1
+
         document.querySelector('#projects').style.transform = "translateX("+offset+"px)"
+        document.querySelector('.app').style.backgroundPosition = +bg+"% center"
     }
 
 })

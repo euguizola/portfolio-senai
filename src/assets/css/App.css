@@ -74,6 +74,8 @@
   display: flex;
   user-select: none;
   padding-bottom: 15px;
+  transition: all 0.1s ease;
+  transform: translateX(-4px)
 }
 
 #projects .project {
@@ -135,7 +137,7 @@
   stroke: 2px #d4145a;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #d4145a;
-  transform: translateX(-30px);
+  transform: translateX(-60px);
 }
 
 .project .identity h2 {
@@ -144,7 +146,7 @@
   color: black;
   font-size: 10vh;
   margin-left: -20%;
-  transform: translateY(30px);
+  transform: translateY(60px);
 }
 
 .bottom {
