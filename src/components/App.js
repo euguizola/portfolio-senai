@@ -52,7 +52,7 @@ class App extends Component {
           <div id="projects">
             {this.state.projects.map((project, i) => {
               return (
-              <div className="project">
+              <div className={"project "+(i > 0 ? 'others' : 'first')}>
                 <div className="thumb-mask">
                   <div className="white-backgroud"></div>
                   <div className="thumb" style={{backgroundImage: "url("+project.picture+")"}}></div>

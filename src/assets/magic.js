@@ -9,6 +9,7 @@ var projectWidth = 0
 var offset = 0
 
 window.addEventListener('load', ()=>{
+    projectWidth = document.querySelectorAll('.project')[0].clientWidth + 40
     let t1
     let t2
     let t3
@@ -16,6 +17,7 @@ window.addEventListener('load', ()=>{
     let t5
     let t6
     let traco
+    let space
     let bottom
     let timeLine1
 
@@ -23,12 +25,13 @@ window.addEventListener('load', ()=>{
         document.querySelector('.app').addEventListener('mousemove', horizontalNavigation)
 
         t1 = TweenMax.to(".project", 0.5, {"min-width":"100%", width: "100%"})
+        space = TweenMax.to(".others", 0.5, {transform: "translateX(-10%)"})
         t2 = TweenMax.to(".thumb-mask", 0.3, {width: "70%", filter: "grayscale(100%) brightness(1.2)"})
-        t3 = TweenMax.to(".thumb", 0.5, {"opacity": 0.3})
-        t4 = TweenMax.to(".identity", 0.3, {opacity: 1})
-        t5 = TweenMax.to(".identity h1", 0.8, {"transform":"translateX(0)"})
-        t6 = TweenMax.to(".identity h2", 0.8, {"transform":"translateY(0)"})
-        traco = TweenMax.to(".traco", 1, {"transform":"scale(1,1)"})
+        t3 = TweenMax.to(".thumb", 0.5, {opacity: 0.3})
+        t4 = TweenMax.to(".identity", 0.5, {opacity: 1})
+        t5 = TweenMax.to(".identity h1", 0.8, {transform:"translateX(0)"})
+        t6 = TweenMax.to(".identity h2", 0.8, {transform:"translateY(0)"})
+        traco = TweenMax.to(".traco", 1.5, {transform:"scale(1,1)"})
         bottom = TweenMax.to(".bottom", 0.3, {opacity: 0})
         
         timeLine1 = new TimelineMax()
@@ -54,7 +57,8 @@ window.addEventListener('load', ()=>{
         t4.reverse()
         t5.reverse()
         t6.reverse()
-        traco.reverse()
+        space.reverse()
+        traco = TweenMax.to(".traco", 1.5, {transform:"scale(0,1)"})
         bottom.reverse()
     })
 
@@ -64,7 +68,7 @@ window.addEventListener('load', ()=>{
         projectQuantity = 0
 
         document.querySelectorAll('.project').forEach(project => {
-            projectWidth = project.clientWidth + 40
+            // projectWidth = project.clientWidth + 40
             totalWidth += projectWidth
             projectQuantity++
         })

@@ -115,6 +115,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 1;
+  background-position: center center;
 }
 
 .project {
@@ -169,6 +170,7 @@
 
 .bottom {
   font-size: 18px;
+  margin-top: 20px;
 }
 
 .when {
