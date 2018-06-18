@@ -35,7 +35,9 @@ window.addEventListener('load', ()=>{
     document.querySelector('.app').addEventListener('mouseup', (e) => {
         document.querySelector('.app').removeEventListener("mousemove", horizontalNavigation)
         if(projectWidth % offset != 0){
-            console.log(projectWidth % offset)
+            document.querySelectorAll('.project').forEach(project => {
+                console.log(project)
+            })
         }
         t1.reverse()
         t2.reverse()
@@ -53,13 +55,17 @@ window.addEventListener('load', ()=>{
 
         document.querySelectorAll('.project').forEach(project => {
             projectWidth = project.clientWidth + 40
-            totalWidth += project.clientWidth + 40
+            totalWidth += projectWidth
             projectQuantity++
         })
 
-        let percentMouse = e.pageX * 100 / document.querySelector('body').clientWidth
-        offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidth
-        document.querySelector('#projects').style.transform = "translateX(-"+offset+"px)"
+        // let percentMouse = e.pageX / document.querySelector('body').clientWidth
+        let mouseScreen = e.movementX * projectQuantity
+        // offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidth
+        if(offset + mouseScreen < 0 && offset + mouseScreen > (totalWidth * -1) + projectWidth){
+            offset += mouseScreen 
+        }
+        document.querySelector('#projects').style.transform = "translateX("+offset+"px)"
     }
 
 })
