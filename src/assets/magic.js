@@ -22,7 +22,7 @@ window.addEventListener('load', ()=>{
         document.querySelector('.app').addEventListener('mousemove', horizontalNavigation)
 
         t1 = TweenMax.to(".project", 0.5, {"min-width":"100%", width: "100%"})
-        t2 = TweenMax.to(".thumb-mask", 0.3, {width: "70%", filter: "grayscale(100%) brightness(1.2)", "box-shadow":"4px 4px 6px rgba(0,0,0,0.06), -4px -4px 6px rgba(0,0,0,0.06)"})
+        t2 = TweenMax.to(".thumb-mask", 0.3, {width: "70%", filter: "grayscale(100%) brightness(1.2)"})
         t3 = TweenMax.to(".thumb", 0.5, {"opacity": 0.3})
         t4 = TweenMax.to(".identity", 0.5, {opacity: 1})
         t5 = TweenMax.to(".identity h1", 0.8, {"transform":"translateX(0)"})
