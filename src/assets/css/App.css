@@ -94,6 +94,7 @@
 .thumb-mask {
   width: 100%;
   overflow: hidden;
+  box-shadow: 4px 4px 6px rgba(0,0,0,0.06), -4px -4px 6px rgba(0,0,0,0.06);
 }
 
 .project .thumb-mask .white-backgroud {
@@ -120,7 +121,6 @@
 
 .project {
   position: relative;
-  box-shadow: "4px 4px 6px rgba(0,0,0,0.06), -4px -4px 6px rgba(0,0,0,0.06)";
 }
 
 .project .identity{
