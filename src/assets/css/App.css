@@ -124,12 +124,26 @@
 
 .project .identity{
   position: absolute;
-  top: -40vh;
+  top: -41vh;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
+}
+
+.project .identity .traco {
+  display: block;
+  position: absolute;
+  width: 20%;
+  height: 3px;
+  background-color: #ccc;
+  top: 50%;
+  left: -10%;
+  content: " ";
+  z-index: 15;
+  transform: scale(0,1);
+  transform-origin: left center;
 }
 
 .project .identity h1 {

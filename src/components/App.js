@@ -58,6 +58,7 @@ class App extends Component {
                   <div className="thumb" style={{backgroundImage: "url("+project.picture+")"}}></div>
                 </div>
                 <div className="identity">
+                  <span className="traco"></span>
                   <h1>{i+1}</h1>  
                   <h2>{project.name}</h2>
                 </div> 
