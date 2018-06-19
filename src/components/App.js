@@ -78,10 +78,13 @@ class App extends Component {
       let slidesTimeout = 4
       let current = 0
       let projects = document.querySelectorAll('.project')
+      let barTween
+      barTween = TweenMax.to(".bar .time", 4, {width: "100%"})
+
       setInterval(()=>{
-        ++current
-        if(current === slidesTimeout * 100) {
-          current = 0
+        barTween.reverse()
+        barTween = TweenMax.to(".bar .time", 0.5, {width: "0%"})
+        barTween = TweenMax.to(".bar .time", 3, {width: "100%", delay: 1})
           if(this.state.active === this.state.projects.length - 1) {
             offset = projects[0].offsetLeft * -1
             this.setState({ active: 0 })
@@ -90,8 +93,7 @@ class App extends Component {
             this.setState({ active: this.state.active+1 })
           }
           document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
-        }
-      }, 1)
+      }, 4000)
 
 
       // Calculo para o cursor seguir o ponteiro
