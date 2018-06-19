@@ -65,6 +65,7 @@ class App extends Component {
       let space
       let bottom
       let grayScaleThumb
+      let header
       // Timeline
       let timeLine1
       // Cursor
@@ -72,16 +73,22 @@ class App extends Component {
       // Tweens cursor
       let cursoranim1
 
-      document.querySelector('.app').addEventListener('mousemove', (e) => {
-        console.log(cursor)
-        let x = e.pageX - (82 / 2)
-        let y = e.pageY - (82 / 2)
-        cursor.style.transform = "translate("+x+"px,"+y+"px)"
-      })
+      // Calculo para o cursor seguir o ponteiro
+      document.querySelector('.app').addEventListener('mousemove', cursorFollow)
 
+      function cursorFollow(e) {
+        let x = e.pageX - (104 / 2)
+        let y = e.pageY - (104 / 2)
+        cursor.style.transform = "translate("+x+"px,"+y+"px)"
+      }
+
+      // Evento ao clicar com o mouse
       document.querySelector('.app').addEventListener('mousedown', (e) => {
+        // Adiciona o evento de movimentação dos cards
+        cursorFollow(e)
         document.querySelector('.app').addEventListener('mousemove', horizontalNavigation)
 
+        // Faz as animações ao clicar
         t1 = TweenMax.to(".project", 0.5, { "min-width": "100%", width: "100%" })
         space = TweenMax.to(".others", 0.5, { transform: "translateX(-10%)" })
         t2 = TweenMax.to(".thumb-mask", 0.85, { width: "70%" })
@@ -92,12 +99,14 @@ class App extends Component {
         t6 = TweenMax.to(".identity h2", 0.8, { transform: "translateY(0)", delay: 0.2 })
         traco = TweenMax.to(".traco", 1.5, { transform: "scale(1,1)" })
         bottom = TweenMax.to(".bottom", 0.3, { opacity: 0 })
+        header = TweenMax.to(".header", 0.6, {opacity: 0.2})
         cursoranim1 = TweenMax.to("#cursor", 0.5, {opacity: 1})
         cursor.classList.add('active')
 
         timeLine1 = new TimelineMax()
       })
 
+      // Evento ao soltar o mouse
       document.querySelector('.app').addEventListener('mouseup', (e) => {
         document.querySelector('.app').removeEventListener("mousemove", horizontalNavigation)
         let last
@@ -121,6 +130,7 @@ class App extends Component {
         t5.reverse()
         t6.reverse()
         space.reverse()
+        header.reverse()
         grayScaleThumb.reverse()
         traco = TweenMax.to(".traco", 1.5, { transform: "scale(0,1)" })
         bottom.reverse()
@@ -177,7 +187,7 @@ class App extends Component {
           </div>
           <div className="bottom">
             <div className="about-project">
-              <span className="type">{this.state.projects[this.state.active].type}</span> .
+              <span className="type">{this.state.projects[this.state.active].type}</span> &nbsp;&nbsp;.&nbsp;&nbsp;
               <span className="when"> {this.state.projects[this.state.active].date}</span>
             </div>
           </div>
