@@ -73,6 +73,27 @@ class App extends Component {
       // Tweens cursor
       let cursoranim1
 
+      // Slide
+      let time = document.querySelector('.bar .time')
+      let slidesTimeout = 4
+      let current = 0
+      let projects = document.querySelectorAll('.project')
+      setInterval(()=>{
+        ++current
+        if(current === slidesTimeout * 100) {
+          current = 0
+          if(this.state.active === this.state.projects.length - 1) {
+            offset = projects[0].offsetLeft * -1
+            this.setState({ active: 0 })
+          } else {
+            offset = projects[this.state.active+1].offsetLeft * -1
+            this.setState({ active: this.state.active+1 })
+          }
+          document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
+        }
+      }, 1)
+
+
       // Calculo para o cursor seguir o ponteiro
       document.querySelector('.app').addEventListener('mousemove', cursorFollow)
 
