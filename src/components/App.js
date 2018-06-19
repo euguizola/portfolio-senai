@@ -117,7 +117,6 @@ class App extends Component {
           if ((projects[i].offsetLeft + 10) * -1 < offset) {
             offset = projects[i].offsetLeft * -1
             this.setState({ active: i })
-            console.log(i)
             i = projects.length + 1
           }
         }
@@ -189,6 +188,13 @@ class App extends Component {
             <div className="about-project">
               <span className="type">{this.state.projects[this.state.active].type}</span> &nbsp;&nbsp;.&nbsp;&nbsp;
               <span className="when"> {this.state.projects[this.state.active].date}</span>
+            </div>
+            <div className="slide">
+              <span className="current">{this.state.active+1}</span>
+              <span className="bar">
+                <span className="time"></span>
+              </span>
+              <span className="total">{this.state.projects.length}</span>
             </div>
           </div>
         </div>
