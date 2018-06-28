@@ -52,6 +52,14 @@ class App extends Component {
     var projectWidth = 0
     var offset = 0
 
+    var scrolling = false
+
+    // Slide
+    var time = document.querySelector('.bar .time')
+    var slidesTimeout = 4
+    var current = 0
+    var barTween
+
     window.addEventListener('load', () => {
       projectWidth = document.querySelectorAll('.project')[0].clientWidth + 40
       // Tweens
@@ -73,27 +81,23 @@ class App extends Component {
       // Tweens cursor
       let cursoranim1
 
-      // Slide
-      let time = document.querySelector('.bar .time')
-      let slidesTimeout = 4
-      let current = 0
-      let projects = document.querySelectorAll('.project')
-      let barTween
+      var projects = document.querySelectorAll('.project')
       barTween = TweenMax.to(".bar .time", 4, {width: "100%"})
-
       setInterval(()=>{
-        barTween.reverse()
-        barTween = TweenMax.to(".bar .time", 0.5, {width: "0%"})
-        barTween = TweenMax.to(".bar .time", 3, {width: "100%", delay: 1})
-          if(this.state.active === this.state.projects.length - 1) {
-            offset = projects[0].offsetLeft * -1
-            this.setState({ active: 0 })
-          } else {
-            offset = projects[this.state.active+1].offsetLeft * -1
-            this.setState({ active: this.state.active+1 })
-          }
-          document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
-      }, 4000)
+        if(!scrolling) {
+          barTween.reverse()
+          barTween = TweenMax.to(".bar .time", 0.5, {width: "0%"})
+          barTween = TweenMax.to(".bar .time", 3, {width: "100%", delay: 1})
+            if(this.state.active === this.state.projects.length - 1) {
+              offset = projects[0].offsetLeft * -1
+              this.setState({ active: 0 })
+            } else {
+              offset = projects[this.state.active+1].offsetLeft * -1
+              this.setState({ active: this.state.active+1 })
+            }
+            document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
+        }
+      }, this.state.projects.length * 1000)
 
 
       // Calculo para o cursor seguir o ponteiro
@@ -107,6 +111,7 @@ class App extends Component {
 
       // Evento ao clicar com o mouse
       document.querySelector('.app').addEventListener('mousedown', (e) => {
+        scrolling = true
         // Adiciona o evento de movimentação dos cards
         cursorFollow(e)
         document.querySelector('.app').addEventListener('mousemove', horizontalNavigation)
@@ -131,6 +136,7 @@ class App extends Component {
 
       // Evento ao soltar o mouse
       document.querySelector('.app').addEventListener('mouseup', (e) => {
+        scrolling = false
         document.querySelector('.app').removeEventListener("mousemove", horizontalNavigation)
         let last
         let maior
