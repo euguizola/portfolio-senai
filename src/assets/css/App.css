@@ -1,3 +1,14 @@
+@keyframes Stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes FillOpacity {
+  to {
+    fill-opacity: 1;
+  }
+}
+
 .header {
   width: 100%;
   padding: 5% 0 60px 0;
@@ -52,9 +63,24 @@
   transform: scale(1,1);
 }
 
-.header #logo img {
+.header #logo {
   min-width: 60px;
   width: 100%;
+  max-width: 200px;
+}
+
+.header #logo .cls-1{
+  fill:#333;
+    fill-opacity: 0;
+    animation-name: Stroke, FillOpacity;
+    animation-duration: 4s, 1s;
+    animation-delay: 0s, 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    stroke: #333;
+    stroke-width: 1px;
 }
 
 .container {
@@ -233,7 +259,7 @@
 }
 
 #cursor-area {
-  display: block;
+  display: none;
   position: absolute;
   overflow: hidden;
   width: 100vw;

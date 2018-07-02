@@ -12,6 +12,7 @@ import code from '../assets/images/projects/code.png'
 import splay from '../assets/images/projects/splay.png'
 import uplab from '../assets/images/projects/uplab.png'
 import educar from '../assets/images/projects/educar.jpg'
+import infocast from '../assets/images/projects/infocast.jpg'
 
 class App extends Component {
   constructor() {
@@ -20,10 +21,10 @@ class App extends Component {
       active: 0,
       projects: [
         {
-          name: "code[xp]",
-          picture: code,
+          name: "infocast",
+          picture: infocast,
           type: "Identidade Visual",
-          date: "2016"
+          date: "2018"
         },
         {
           name: "uplab",
@@ -36,6 +37,12 @@ class App extends Component {
           picture: splay,
           type: "Identidade Visual",
           date: "2017"
+        },
+        {
+          name: "code[xp]",
+          picture: code,
+          type: "Identidade Visual",
+          date: "2016"
         },
         {
           name: "e.cub",
@@ -85,6 +92,7 @@ class App extends Component {
       let timeLine1
       // Cursor
       let cursor = document.querySelector('#cursor')
+      let cursorArea = document.querySelector('#cursor-area')
       // Tweens cursor
       let cursoranim1
 
@@ -92,7 +100,7 @@ class App extends Component {
       var projects = document.querySelectorAll('.project')
       barTween = TweenMax.to(".bar .time", 4, { width: "100%" })
       var about
-      setInterval(() => {
+      var slidesInterval = setInterval(() => {
         if (!scrolling) {
           barTween.reverse()
           barTween = TweenMax.to(".bar .time", 0.5, { width: "0%" })
@@ -130,6 +138,7 @@ class App extends Component {
 
       let eventClick = (e) => {
         scrolling = true
+        cursorArea.style.display = 'block'
         // Adiciona o evento de movimentação dos cards
         cursorFollow(e)
         document.querySelector('.app').addEventListener('mousemove', horizontalNavigation)
@@ -147,9 +156,10 @@ class App extends Component {
         traco = TweenMax.to(".traco", 1.5, { transform: "scale(1,1)" })
         bottom = TweenMax.to(".bottom", 0.3, { opacity: 0 })
         header = TweenMax.to(".header", 0.6, { opacity: 0.2 })
-        cursoranim1 = TweenMax.to("#cursor", 0.5, { opacity: 1 })
-        cursor.classList.add('active')
-
+        setTimeout(()=>{
+          cursoranim1 = TweenMax.to("#cursor", 0.5, { opacity: 1, delay: 0.2 })
+          cursor.classList.add('active')
+        }, 250)
         timeLine1 = new TimelineMax()
       }
 
@@ -161,12 +171,11 @@ class App extends Component {
         scrolling = false
         document.querySelector('.app').removeEventListener("mousemove", horizontalNavigation)
         document.querySelector('.app').removeEventListener('touchmove', horizontalNavigation)
-        let last
-        let maior
         let projects = document.querySelectorAll('.project')
+        let wasActive = this.state.active
         for (let i = 0; i < projects.length; i++) {
           this.setState({ active: i })
-          if ((projects[i].offsetLeft + 10) * -1 < offset) {
+          if ((projects[i].offsetLeft + (projectWidth / 2)) * -1 < offset) {
             offset = projects[i].offsetLeft * -1
             this.setState({ active: i })
             i = projects.length + 1
@@ -187,6 +196,11 @@ class App extends Component {
         bottom.reverse()
         cursoranim1.reverse()
         cursor.classList.remove('active')
+        if (wasActive === this.state.active) {
+          clearInterval(slidesInterval)
+          this.props.history.push(`/${this.state.projects[this.state.active].name}`)
+        }
+        setTimeout(()=>{cursorArea.style.display = 'none'}, 800)
       }
 
       // Evento ao soltar o mouse
@@ -194,7 +208,6 @@ class App extends Component {
       document.querySelector('.app').addEventListener('touchend', eventUp)
 
       function horizontalNavigation(e) {
-        console.log(e)
         totalWidth = 0
         projectQuantity = 0
 
@@ -212,8 +225,8 @@ class App extends Component {
         }
         // let percentMouse = e.pageX / document.querySelector('body').clientWidth
         let mouseScreen = movementX * projectQuantity
-        // offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidth
-        if (offset + mouseScreen < 0 && offset + mouseScreen > (totalWidth * -1) + projectWidth) {
+        // offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidthnpm 
+        if (offset + mouseScreen < 0 && offset + mouseScreen > (totalWidth * -1) + (projectWidth - 200)) {
           offset += mouseScreen
         }
 
@@ -232,7 +245,7 @@ class App extends Component {
           <div id="projects">
             {this.state.projects.map((project, i) => {
               return (
-                <div className={"project " + (i > 0 ? 'others' : 'first')}>
+                <div className={"project " + (i > 0 ? 'others' : 'first')} key={i}>
                   <div className="thumb-mask">
                     <div className="white-backgroud"></div>
                     <div className="thumb" style={{ backgroundImage: "url(" + project.picture + ")" }}></div>
@@ -261,7 +274,7 @@ class App extends Component {
           </div>
         </div>
         <div id="cursor-area">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113.44 52" id="cursor"><g id="Camada_2" data-name="Camada 2"><g id="elementos"><circle class="cls-1 circle" cx="56.72" cy="26" r="25" /><polyline class="cls-1" points="12.02 36.61 1.41 26 12.02 15.39" /><polyline class="cls-1" points="101.41 15.39 112.02 26 101.41 36.61" /></g></g></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113.44 52" id="cursor"><g id="Camada_2" data-name="Camada 2"><g id="elementos"><circle className="cls-1 circle" cx="56.72" cy="26" r="25" /><polyline className="cls-1" points="12.02 36.61 1.41 26 12.02 15.39" /><polyline className="cls-1" points="101.41 15.39 112.02 26 101.41 36.61" /></g></g></svg>
         </div>
       </div>
     );
