@@ -58,9 +58,9 @@ class App extends Component {
         }
       ]
     }
+    this.setupAnimations = this.setupAnimations.bind(this)
   }
-  render() {
-
+  setupAnimations() {
     var projectQuantity = 0
     var totalWidth = 0
     var projectWidth = 0
@@ -74,7 +74,6 @@ class App extends Component {
     var current = 0
     var barTween
 
-    window.addEventListener('load', () => {
       projectWidth = document.querySelectorAll('.project')[0].clientWidth + 40
       // Tweens
       let t1
@@ -157,9 +156,9 @@ class App extends Component {
         bottom = TweenMax.to(".bottom", 0.3, { opacity: 0 })
         header = TweenMax.to(".header", 0.6, { opacity: 0.2 })
         setTimeout(()=>{
-          cursoranim1 = TweenMax.to("#cursor", 0.5, { opacity: 1, delay: 0.2 })
           cursor.classList.add('active')
         }, 250)
+        cursoranim1 = TweenMax.to("#cursor", 0.5, { opacity: 1, delay: 0.3 })
         timeLine1 = new TimelineMax()
       }
 
@@ -235,9 +234,11 @@ class App extends Component {
         document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
         document.querySelector('.app').style.backgroundPosition = +bg + "% center"
       }
-
-    })
-
+  }
+  componentDidMount() {
+    this.setupAnimations()
+  }
+  render() {
     return (
       <div className="app">
         <Header></Header>
