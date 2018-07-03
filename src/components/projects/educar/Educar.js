@@ -9,7 +9,7 @@ import Image2 from './2.jpg'
 import Image3 from './3.jpg'
 import Image4 from './4.jpg'
 
-class Infocast extends Component {
+class Educar extends Component {
   constructor() {
     super();
     this.state = {
@@ -33,7 +33,7 @@ class Infocast extends Component {
         <Header></Header>
         <div className="container" id="about">
           <div id="info">
-            <h2>Infocast</h2>
+            <h2>Educar</h2>
             <p>Identidade Visual - Design Digital</p>
           </div>
           <div id="owners">
@@ -46,11 +46,11 @@ class Infocast extends Component {
           <img src={Image1} alt="Primeira imagem" />
           <img src={Image2} alt="Segunda imagem" />
           <img src={Image3} alt="Terceira imagem" />
-          <img src={Image4} alt="Quarta imagem" />
+          <img src={Image4} alt="Quarte imagem" />
         </div>
       </div>
     );
   }
 }
 
-export default Infocast;
+export default Educar;
