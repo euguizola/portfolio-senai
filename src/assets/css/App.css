@@ -122,119 +122,6 @@ header #logo .cls-2{
   overflow: hidden;
 }
 
-#projects {
-  display: flex;
-  user-select: none;
-  padding-bottom: 15px;
-  transition: all 0.6s ease-out;
-  transform: translateX(-4px)
-}
-
-#projects .project {
-  width: 100%;
-  min-width: 100%;
-  max-width: 1280px;
-  margin-left: 15%;
-}
-
-#projects .project:first-child {
-  margin-left: 0;
-}
-
-.thumb-mask {
-  width: 100%;
-  overflow: hidden;
-  box-shadow: 4px 4px 6px rgba(0,0,0,0.06), -4px -4px 6px rgba(0,0,0,0.06);
-}
-
-.project .thumb-mask .white-backgroud {
-  background-color: white;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.project .thumb {
-  width: 100%;
-  overflow: hidden;
-  height: 60vh;
-  display: block;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 1;
-  background-position: center center;
-}
-
-.project {
-  position: relative;
-}
-
-.project .identity{
-  position: absolute;
-  top: -50vh;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-}
-
-.project .identity .traco {
-  display: block;
-  position: absolute;
-  width: 20%;
-  height: 3px;
-  background-color: #ccc;
-  top: 50%;
-  left: -10%;
-  content: " ";
-  z-index: 15;
-  transform: scale(0,1);
-  transform-origin: left center;
-}
-
-.project .identity h1 {
-  font-size: 100vh;
-  padding: 0;
-  margin: 0;
-  color: transparent;
-  stroke: 2px #d4145a;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: #d4145a;
-  transform: translateX(-60px);
-}
-
-.project .identity h2 {
-  padding: 0;
-  margin: 0;
-  color: black;
-  font-size: 12vh;
-  margin-left: -20%;
-  transform: translateY(60px);
-  font-weight: 700;
-}
-
-.bottom {
-  font-size: 22px;
-  margin-top: 20px;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
-}
-
-.bottom .about-project{
-  transition: all 0.4s ease;
-}
-
-.when {
- color: #cccccc;
-}
-
 .slide {
   flex: 2;
   display: inline-flex;
@@ -366,6 +253,50 @@ header #logo .cls-2{
 #about #owners a + a {
   margin-left: -10px;
 }
+
+/* BLACK */
+
+.app#black {
+  background-image: url("../images/bg-black.jpg");
+  overflow-y: auto;
+}
+
+#black .header #logo .cls-1{
+  fill:#f2f2f2;
+    fill-opacity: 0;
+    animation-name: Stroke, FillOpacity;
+    animation-duration: 4s, 1s;
+    animation-delay: 0s, 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    stroke: #f2f2f2;
+    stroke-width: 1px;
+}
+
+#black header #logo .cls-2{
+  fill:#b3b3b3;
+  fill-opacity: 0;
+  animation-name: Stroke, FillOpacity;
+  animation-duration: 4s, 1s;
+  animation-delay: 0s, 1.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  stroke: #b3b3b3;
+  stroke-width: 1px;
+}
+
+#black .header nav a.current{
+  color: #f2f2f2;
+}
+
+#black .header nav a.current .selector {
+  background-color: #f2f2f2;
+}
+
 
 @media (max-width: 768px) {
   .project .identity{

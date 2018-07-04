@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/css/App.css';
+import '../assets/css/Projects.css';
 import Header from './Header';
 
 import TweenMax from 'gsap/src/uncompressed/TweenMax';
@@ -19,24 +20,13 @@ class App extends Component {
     super();
     this.state = {
       active: 0,
+      slides: {},
       projects: [
         {
           name: "infocast",
           picture: infocast,
           type: "Identidade Visual",
           date: "2018"
-        },
-        {
-          name: "uplab",
-          picture: uplab,
-          type: "Identidade Visual",
-          date: "2017"
-        },
-        {
-          name: "s.play",
-          picture: splay,
-          type: "Identidade Visual",
-          date: "2017"
         },
         {
           name: "code[xp]",
@@ -99,9 +89,8 @@ class App extends Component {
     var projects = document.querySelectorAll('.project')
     barTween = TweenMax.to(".bar .time", 4, { width: "100%" })
     var about
-    var slidesInterval;
     var slidesFunction = () => {
-      if (!scrolling) {
+      if (!scrolling && document.querySelector('#projects')) {
         barTween = TweenMax.to(".bar .time", 0.5, { width: "0%" })
         barTween = TweenMax.to(".bar .time", 3, { width: "100%", delay: 1 })
         if (this.state.active === this.state.projects.length - 1) {
@@ -114,12 +103,9 @@ class App extends Component {
         about = TweenMax.to(".about-project", 0.1, { transform: "translateY(30px)" })
         document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
         about = TweenMax.to(".about-project", 0.1, { transform: "translateY(0px)", delay: 1 })
-      } else {
-        clearInterval(slidesInterval)
-        slidesInterval = setInterval(slidesFunction, this.state.projects.length * 1000)
       }
     }
-    slidesInterval = setInterval(slidesFunction, this.state.projects.length * 1000)
+    this.setState({slides: setInterval(slidesFunction, this.state.projects.length * 1000)})
 
 
     // Calculo para o cursor seguir o ponteiro
@@ -207,7 +193,7 @@ class App extends Component {
       let content = document.querySelector('#content')
       if (e.pageX > content.offsetLeft && e.pageX < content.offsetLeft + content.clientWidth && e.pageY > content.offsetTop && e.pageY < content.offsetLeft + content.clientHeight) {
         if (wasActive === this.state.active) {
-          clearInterval(slidesInterval)
+          clearInterval(this.state.slides)
           this.props.history.push(`/${this.state.projects[this.state.active].name}`)
         }
       }
