@@ -30,7 +30,7 @@ class Educar extends Component {
   render() {
     return (
       <div className="app" id="portfolio">
-        <Header></Header>
+        <Header voltar={true}></Header>
         <div className="container" id="about">
           <div id="info">
             <h2>Educar</h2>

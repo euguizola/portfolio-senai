@@ -17,7 +17,7 @@ class Infocast extends Component {
     }
   }
   componentWillMount() {
-    fetch('https://www.behance.net/v2/projects/64913213?api_key=OgcEKxgXnxNcHihcPqcTeK0dY7pAYwik')
+    fetch('https://www.behance.net/v2/projects/67526709?api_key=OgcEKxgXnxNcHihcPqcTeK0dY7pAYwik')
     .then(response => {
       return response.json()
     })
@@ -30,7 +30,7 @@ class Infocast extends Component {
   render() {
     return (
       <div className="app" id="portfolio">
-        <Header></Header>
+        <Header voltar={true}></Header>
         <div className="container" id="about">
           <div id="info">
             <h2>Infocast</h2>
@@ -38,7 +38,7 @@ class Infocast extends Component {
           </div>
           <div id="owners">
             {this.state.owners.map( (owner, i) => {
-              return <a style={{"z-index":i}} href={owner.url}><ReactTooltip effect="solid"/><img src={owner.images['50']} alt="imagem" data-tip={owner.first_name + " " + owner.last_name}/></a>
+              return <a style={{zIndex:(this.state.owners.length - i)}} key={i} href={owner.url}><ReactTooltip effect="solid"/><img src={owner.images['50']} alt="imagem" data-tip={owner.first_name + " " + owner.last_name}/></a>
             })}
           </div>
         </div>

@@ -110,6 +110,7 @@ header #logo .cls-2{
   width: 100%;
   padding: 0 40px;
   margin: 0 auto;
+  overflow-x: visible;
 }
 
 .app {

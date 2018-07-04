@@ -241,7 +241,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Header></Header>
+        <Header voltar={false}></Header>
         <div className="container">
           <div id="projects">
             {this.state.projects.map((project, i) => {
