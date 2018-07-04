@@ -14,6 +14,7 @@ import splay from '../assets/images/projects/splay.png'
 import uplab from '../assets/images/projects/uplab.png'
 import educar from '../assets/images/projects/educar.jpg'
 import infocast from '../assets/images/projects/infocast.jpg'
+import lean from '../assets/images/projects/lean.jpg'
 
 class App extends Component {
   constructor() {
@@ -25,6 +26,12 @@ class App extends Component {
         {
           name: "infocast",
           picture: infocast,
+          type: "Identidade Visual",
+          date: "2018"
+        },
+        {
+          name: "senai.lean",
+          picture: lean,
           type: "Identidade Visual",
           date: "2018"
         },
