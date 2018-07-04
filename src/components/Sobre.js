@@ -58,7 +58,7 @@ class Sobre extends Component {
   render() {
     return (
       <div className="app" id="black">
-        <Header voltar={false}></Header>
+        <Header voltar={true}></Header>
         <div className="container" id="content">
           <div id="about">
             <div id="text">
