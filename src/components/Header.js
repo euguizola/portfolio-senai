@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom'
 import iconLupa from '../assets/images/lupa-icon.svg'
 
 class Header extends Component {
+  constructor() {
+    super()
+  }
   render() {
     let voltar = this.props.voltar ? <NavLink to="/" activeClassName="current" id="voltar">voltar</NavLink> : ''
     return (

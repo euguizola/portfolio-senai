@@ -74,68 +74,73 @@ class App extends Component {
     var current = 0
     var barTween
 
-      projectWidth = document.querySelectorAll('.project')[0].clientWidth + 40
-      // Tweens
-      let t1
-      let t2
-      let t3
-      let t4
-      let t5
-      let t6
-      let traco
-      let space
-      let bottom
-      let grayScaleThumb
-      let header
-      // Timeline
-      let timeLine1
-      // Cursor
-      let cursor = document.querySelector('#cursor')
-      let cursorArea = document.querySelector('#cursor-area')
-      // Tweens cursor
-      let cursoranim1
+    projectWidth = document.querySelectorAll('.project')[0].clientWidth + 40
+    // Tweens
+    let t1
+    let t2
+    let t3
+    let t4
+    let t5
+    let t6
+    let traco
+    let space
+    let bottom
+    let grayScaleThumb
+    let header
+    // Timeline
+    let timeLine1
+    // Cursor
+    let cursor = document.querySelector('#cursor')
+    let cursorArea = document.querySelector('#cursor-area')
+    // Tweens cursor
+    let cursoranim1
 
-      // Slide
-      var projects = document.querySelectorAll('.project')
-      barTween = TweenMax.to(".bar .time", 4, { width: "100%" })
-      var about
-      var slidesInterval = setInterval(() => {
-        if (!scrolling) {
-          barTween.reverse()
-          barTween = TweenMax.to(".bar .time", 0.5, { width: "0%" })
-          barTween = TweenMax.to(".bar .time", 3, { width: "100%", delay: 1 })
-          if (this.state.active === this.state.projects.length - 1) {
-            offset = projects[0].offsetLeft * -1
-            this.setState({ active: 0 })
-          } else {
-            offset = projects[this.state.active + 1].offsetLeft * -1
-            this.setState({ active: this.state.active + 1 })
-          }
-          about = TweenMax.to(".about-project", 0.1, {transform: "translateY(30px)"})
-          document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
-          about = TweenMax.to(".about-project", 0.1, {transform: "translateY(0px)", delay: 1})
+    // Slide
+    var projects = document.querySelectorAll('.project')
+    barTween = TweenMax.to(".bar .time", 4, { width: "100%" })
+    var about
+    var slidesInterval;
+    var slidesFunction = () => {
+      if (!scrolling) {
+        barTween = TweenMax.to(".bar .time", 0.5, { width: "0%" })
+        barTween = TweenMax.to(".bar .time", 3, { width: "100%", delay: 1 })
+        if (this.state.active === this.state.projects.length - 1) {
+          offset = projects[0].offsetLeft * -1
+          this.setState({ active: 0 })
+        } else {
+          offset = projects[this.state.active + 1].offsetLeft * -1
+          this.setState({ active: this.state.active + 1 })
         }
-      }, this.state.projects.length * 1000)
-
-
-      // Calculo para o cursor seguir o ponteiro
-      document.querySelector('.app').addEventListener('mousemove', cursorFollow)
-      document.querySelector('.app').addEventListener('touchmove', cursorFollow)
-
-      function cursorFollow(e) {
-        let pageX = e.pageX
-        let pageY = e.pageY
-
-        if (e.changedTouches) {
-          pageX = e.changedTouches[0].pageX
-          pageY = e.changedTouches[0].pageY
-        }
-        let x = pageX - (104 / 2)
-        let y = pageY - (104 / 2)
-        cursor.style.transform = "translate(" + x + "px," + y + "px)"
+        about = TweenMax.to(".about-project", 0.1, { transform: "translateY(30px)" })
+        document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
+        about = TweenMax.to(".about-project", 0.1, { transform: "translateY(0px)", delay: 1 })
+      } else {
+        clearInterval(slidesInterval)
+        slidesInterval = setInterval(slidesFunction, this.state.projects.length * 1000)
       }
+    }
+    slidesInterval = setInterval(slidesFunction, this.state.projects.length * 1000)
 
-      let eventClick = (e) => {
+
+    // Calculo para o cursor seguir o ponteiro
+
+    function cursorFollow(e) {
+      let pageX = e.pageX
+      let pageY = e.pageY
+
+      if (e.changedTouches) {
+        pageX = e.changedTouches[0].pageX
+        pageY = e.changedTouches[0].pageY
+      }
+      let x = pageX - (104 / 2)
+      let y = pageY - (104 / 2)
+      cursor.style.transform = "translate(" + x + "px," + y + "px)"
+    }
+
+    let eventClick = (e) => {
+      setTimeout(() => {
+        document.querySelector('.app').addEventListener('mousemove', cursorFollow)
+        document.querySelector('.app').addEventListener('touchmove', cursorFollow)
         scrolling = true
         cursorArea.style.display = 'block'
         // Adiciona o evento de movimentação dos cards
@@ -155,85 +160,93 @@ class App extends Component {
         traco = TweenMax.to(".traco", 1.5, { transform: "scale(1,1)" })
         bottom = TweenMax.to(".bottom", 0.3, { opacity: 0 })
         header = TweenMax.to(".header", 0.6, { opacity: 0.2 })
-        setTimeout(()=>{
+        setTimeout(() => {
           cursor.classList.add('active')
         }, 250)
         cursoranim1 = TweenMax.to("#cursor", 0.5, { opacity: 1, delay: 0.3 })
         timeLine1 = new TimelineMax()
-      }
+      }, 300)
+    }
 
-      // Evento ao clicar com o mouse
-      document.querySelector('.app').addEventListener('mousedown', eventClick)
-      document.querySelector('.app').addEventListener('touchstart', eventClick)
+    // Evento ao clicar com o mouse
+    document.querySelector('.app').addEventListener('mousedown', eventClick)
+    document.querySelector('.app').addEventListener('touchstart', eventClick)
 
-      let eventUp = () => {
+    let eventUp = (e) => {
+      setTimeout(()=>{
         scrolling = false
-        document.querySelector('.app').removeEventListener("mousemove", horizontalNavigation)
-        document.querySelector('.app').removeEventListener('touchmove', horizontalNavigation)
-        let projects = document.querySelectorAll('.project')
-        let wasActive = this.state.active
-        for (let i = 0; i < projects.length; i++) {
+      document.querySelector('.app').removeEventListener('mousemove', cursorFollow)
+      document.querySelector('.app').removeEventListener('touchmove', cursorFollow)
+      document.querySelector('.app').removeEventListener("mousemove", horizontalNavigation)
+      document.querySelector('.app').removeEventListener('touchmove', horizontalNavigation)
+      let projects = document.querySelectorAll('.project')
+      let wasActive = this.state.active
+      for (let i = 0; i < projects.length; i++) {
+        this.setState({ active: i })
+        if ((projects[i].offsetLeft + (projectWidth / 2)) * -1 < offset) {
+          offset = projects[i].offsetLeft * -1
           this.setState({ active: i })
-          if ((projects[i].offsetLeft + (projectWidth / 2)) * -1 < offset) {
-            offset = projects[i].offsetLeft * -1
-            this.setState({ active: i })
-            i = projects.length + 1
-          }
+          i = projects.length + 1
         }
-        TweenMax.getAllTweens().reverse()
-        document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
-        t1.reverse()
-        t2 = TweenMax.to(".thumb-mask", 0.85, { width: "100%" })
-        t3.reverse()
-        t4.reverse()
-        t5.reverse()
-        t6.reverse()
-        space.reverse()
-        header.reverse()
-        grayScaleThumb.reverse()
-        traco = TweenMax.to(".traco", 1.5, { transform: "scale(0,1)" })
-        bottom.reverse()
-        cursoranim1.reverse()
-        cursor.classList.remove('active')
+      }
+      TweenMax.getAllTweens().reverse()
+      document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
+      t1.reverse()
+      t2 = TweenMax.to(".thumb-mask", 0.85, { width: "100%" })
+      t3.reverse()
+      t4.reverse()
+      t5.reverse()
+      t6.reverse()
+      space.reverse()
+      header.reverse()
+      grayScaleThumb.reverse()
+      traco = TweenMax.to(".traco", 1.5, { transform: "scale(0,1)" })
+      bottom.reverse()
+      cursoranim1.reverse()
+      cursor.classList.remove('active')
+      let content = document.querySelector('#content')
+      if (e.pageX > content.offsetLeft && e.pageX < content.offsetLeft + content.clientWidth && e.pageY > content.offsetTop && e.pageY < content.offsetLeft + content.clientHeight) {
         if (wasActive === this.state.active) {
           clearInterval(slidesInterval)
           this.props.history.push(`/${this.state.projects[this.state.active].name}`)
         }
-        setTimeout(()=>{cursorArea.style.display = 'none'}, 800)
+      }
+      setTimeout(() => { cursorArea.style.display = 'none' }, 800)
+      },300)
+    }
+
+    // Evento ao soltar o mouse
+    document.querySelector('.app').addEventListener('mouseup', eventUp)
+    document.querySelector('.app').addEventListener('touchend', eventUp)
+
+    function horizontalNavigation(e) {
+      totalWidth = 0
+      projectQuantity = 0
+
+      document.querySelectorAll('.project').forEach(project => {
+        // projectWidth = project.clientWidth + 40
+        totalWidth += projectWidth
+        projectQuantity++
+      })
+
+      let movementX;
+      if (e.changedTouches) {
+        movementX = e.changedTouches[0].clientX
+      } else {
+        movementX = e.movementX
+      }
+      // let percentMouse = e.pageX / document.querySelector('body').clientWidth
+      let mouseScreen = movementX * projectQuantity
+      // offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidthnpm 
+      if (offset + mouseScreen < 0 && offset + mouseScreen > (totalWidth * -1) + (projectWidth - 200)) {
+        offset += mouseScreen
       }
 
-      // Evento ao soltar o mouse
-      document.querySelector('.app').addEventListener('mouseup', eventUp)
-      document.querySelector('.app').addEventListener('touchend', eventUp)
+      let bg = (offset / 100) * -1
 
-      function horizontalNavigation(e) {
-        totalWidth = 0
-        projectQuantity = 0
-
-        document.querySelectorAll('.project').forEach(project => {
-          // projectWidth = project.clientWidth + 40
-          totalWidth += projectWidth
-          projectQuantity++
-        })
-
-        let movementX;
-        if (e.changedTouches) {
-          movementX = e.changedTouches[0].clientX
-        } else {
-          movementX = e.movementX
-        }
-        // let percentMouse = e.pageX / document.querySelector('body').clientWidth
-        let mouseScreen = movementX * projectQuantity
-        // offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidthnpm 
-        if (offset + mouseScreen < 0 && offset + mouseScreen > (totalWidth * -1) + (projectWidth - 200)) {
-          offset += mouseScreen
-        }
-
-        let bg = (offset / 100) * -1
-
-        document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
-        document.querySelector('.app').style.backgroundPosition = +bg + "% center"
-      }
+      document.querySelector('#projects').style.transform = "translateX(" + offset + "px)"
+      document.querySelector('.app').style.backgroundPosition = +bg + "% center"
+    }
   }
   componentDidMount() {
     this.setupAnimations()
@@ -242,7 +255,7 @@ class App extends Component {
     return (
       <div className="app">
         <Header voltar={false}></Header>
-        <div className="container">
+        <div className="container" id="content">
           <div id="projects">
             {this.state.projects.map((project, i) => {
               return (
