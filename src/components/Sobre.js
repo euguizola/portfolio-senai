@@ -51,8 +51,9 @@ class Sobre extends Component {
         } else {
           this.setState({ active: this.state.active + 1 })
         }
+        let bg = (this.state.active * 100) / (this.state.texts.length)
+        document.querySelector('.app').style.backgroundPosition = +bg + "% center"
       }, 1000)
-
       about = TweenMax.to("#text", 0.6, { transform: "translateY(0px)", opacity: 1, delay: 1 })
       setTimeout(() => { this.setState({scrolling: false}) }, 2000)
     }
