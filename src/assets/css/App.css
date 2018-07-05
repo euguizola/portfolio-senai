@@ -125,10 +125,24 @@ header #logo .cls-2{
 .slide {
   flex: 2;
   display: inline-flex;
-  justify-content: center;
   align-items: center;
   max-width: 380px;
   padding-left: 10px;
+  width: 100%;
+  flex-direction: column;
+}
+.slide div{
+  width: 100%;
+  display: flex;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide #action {
+  font-size: 14px;
+  width: 100%;
+  text-align: left;
 }
 
 .slide .total {
@@ -223,6 +237,11 @@ header #logo .cls-2{
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.about-overlay {
+  max-height: 30px;
+  overflow: hidden;
 }
 
 #about h2 {

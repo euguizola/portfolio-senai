@@ -12,6 +12,7 @@ class Sobre extends Component {
   constructor() {
     super();
     this.state = {
+      scrolling: false,
       active: 0,
       slides: {},
       texts: [
@@ -30,30 +31,37 @@ class Sobre extends Component {
       ]
     }
     this.setupAnimations = this.setupAnimations.bind(this)
+    this.scrollFunction = this.scrollFunction.bind(this)
   }
   setupAnimations() {
-    var scrolling = false
-    var barTween = TweenMax.to(".bar .time", 9, { width: "100%" })
+    TweenMax.to(".bar .time", 1, { width: "100%" })
+    window.addEventListener('wheel', this.scrollFunction)
+  }
+  scrollFunction() {
+    var barTween
     var about
-    var slidesFunction = () => {
-      if (!scrolling && document.querySelector('#about')) {
-        barTween = TweenMax.to(".bar .time", 3, { width: "0%" })
-        barTween = TweenMax.to(".bar .time", 6, { width: "100%", delay: 3 })
-        about = TweenMax.to("#text", 0.6, { transform: "translateY(22px)", opacity: 0 })
-        setTimeout(()=>{
-          if (this.state.active === this.state.texts.length - 1) {
-            this.setState({ active: 0 })
-          } else {
-            this.setState({ active: this.state.active + 1 })
-          }
-          about = TweenMax.to("#text", 0.6, { transform: "translateY(0px)", opacity: 1, delay: 1 })
-        },600) 
-      }
+    if (!this.state.scrolling) {
+      this.setState({scrolling: true})
+      barTween = TweenMax.to(".bar .time", 1, { width: "0%" })
+      barTween = TweenMax.to(".bar .time", 1, { width: "100%", delay: 1 })
+      about = TweenMax.to("#text", 0.6, { transform: "translateY(22px)", opacity: 0 })
+      setTimeout(() => {
+        if (this.state.active === this.state.texts.length - 1) {
+          this.setState({ active: 0 })
+        } else {
+          this.setState({ active: this.state.active + 1 })
+        }
+      }, 1000)
+
+      about = TweenMax.to("#text", 0.6, { transform: "translateY(0px)", opacity: 1, delay: 1 })
+      setTimeout(() => { this.setState({scrolling: false}) }, 2000)
     }
-    this.setState({slides: setInterval(slidesFunction, this.state.texts.length * 3000)})
   }
   componentDidMount() {
     this.setupAnimations()
+  }
+  componentWillUnmount() {
+    window.removeEventListener('wheel', this.scrollFunction)
   }
   render() {
     return (
@@ -69,12 +77,15 @@ class Sobre extends Component {
             </div>
           </div>
           <div className="bottom">
-            <div className="slide">
+          <div className="slide">
+              <div>
               <span className="current">{this.state.active + 1}</span>
               <span className="bar">
                 <span className="time"></span>
               </span>
               <span className="total">{this.state.texts.length}</span>
+              </div>
+              <span id="action">scroll</span>
             </div>
           </div>
         </div>
