@@ -138,13 +138,13 @@ class App extends Component {
         cursorFollow(e)
         document.querySelector('.app').addEventListener('mousemove', this.horizontalNavigation)
         document.querySelector('.app').addEventListener('touchmove', this.horizontalNavigation)
-
         // Faz as animações ao clicar
         t1 = TweenMax.to(".project", 0.5, { "min-width": "100%", width: "100%" })
         space = TweenMax.to(".others", 0.5, { transform: "translateX(-10%)" })
         t2 = TweenMax.to(".thumb-mask", 0.85, { width: "70%" })
         grayScaleThumb = TweenMax.to(".thumb-mask", 0.3, { filter: "grayscale(100%) brightness(1.2)" })
         t3 = TweenMax.to(".thumb", 0.5, { opacity: 0.3 })
+        TweenMax.to(".identity", 0.1, { display: 'flex' })
         t4 = TweenMax.to(".identity", 0.5, { opacity: 1 })
         t5 = TweenMax.to(".identity h1", 0.8, { transform: "translateX(0)", delay: 0.2 })
         t6 = TweenMax.to(".identity h2", 0.8, { transform: "translateY(0)", delay: 0.2 })
@@ -185,6 +185,7 @@ class App extends Component {
         t1.reverse()
         t2 = TweenMax.to(".thumb-mask", 0.85, { width: "100%" })
         t3.reverse()
+        TweenMax.to(".identity", 0.1, { display: 'none' })
         t4.reverse()
         t5.reverse()
         t6.reverse()
