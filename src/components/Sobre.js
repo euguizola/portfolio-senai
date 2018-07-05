@@ -85,7 +85,7 @@ class Sobre extends Component {
               </span>
               <span className="total">{this.state.texts.length}</span>
               </div>
-              <span id="action">scroll</span>
+              <span id="action">role a página</span>
             </div>
           </div>
         </div>

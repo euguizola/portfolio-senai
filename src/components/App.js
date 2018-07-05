@@ -278,7 +278,7 @@ class App extends Component {
                 </span>
                 <span className="total">{this.state.projects.length}</span>
               </div>
-              <span id="action">drag</span>
+              <span id="action">clique e arraste</span>
             </div>
           </div>
         </div>
