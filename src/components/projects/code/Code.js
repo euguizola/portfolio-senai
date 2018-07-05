@@ -9,7 +9,7 @@ import Image2 from './2.jpg'
 import Image3 from './3.jpg'
 import Image4 from './4.jpg'
 
-class Educar extends Component {
+class Code extends Component {
   constructor() {
     super();
     this.state = {
@@ -17,7 +17,7 @@ class Educar extends Component {
     }
   }
   componentWillMount() {
-    fetch('https://www.behance.net/v2/projects/67539419?api_key=OgcEKxgXnxNcHihcPqcTeK0dY7pAYwik')
+    fetch('https://www.behance.net/v2/projects/67534175?api_key=OgcEKxgXnxNcHihcPqcTeK0dY7pAYwik')
     .then(response => {
       return response.json()
     })
@@ -33,7 +33,7 @@ class Educar extends Component {
         <Header voltar={true}></Header>
         <div className="container" id="about">
           <div id="info">
-            <h2>Educar</h2>
+            <h2>Code[xp]</h2>
             <p>Identidade Visual - Design Digital</p>
           </div>
           <div id="owners">
@@ -53,4 +53,4 @@ class Educar extends Component {
   }
 }
 
-export default Educar;
+export default Code;
