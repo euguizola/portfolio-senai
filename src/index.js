@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Sobre from './components/Sobre'
+import Contato from './components/Contato'
 
 // Pages
 import Infocast from './components/projects/infocast/Infocast'
@@ -21,6 +22,7 @@ ReactDOM.render(
                     <Switch location={location}>
                         <Route exact path="/" component={App} />
                         <Route exact path="/sobre" component={Sobre} />
+                        <Route exact path="/contato" component={Contato} />
                         {/* PROJETOS */}
                         <Route exact path="/infocast" component={Infocast} />
                         <Route exact path="/educar" component={Educar} />
