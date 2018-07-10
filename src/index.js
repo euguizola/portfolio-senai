@@ -13,6 +13,7 @@ import Infocast from './components/projects/infocast/Infocast'
 import Educar from './components/projects/educar/Educar'
 import Lean from './components/projects/lean/Lean'
 import Code from './components/projects/code/Code'
+import Ecub from './components/projects/ecub/Ecub'
 
 ReactDOM.render(
     <Router>
@@ -28,6 +29,7 @@ ReactDOM.render(
                         <Route exact path="/educar" component={Educar} />
                         <Route exact path="/senai.lean" component={Lean} />
                         <Route exact path="/code[xp]" component={Code} />
+                        <Route exact path="/e.cub" component={Ecub} />
                     </Switch>
                 </CSSTransition>
             </TransitionGroup>

@@ -48,7 +48,17 @@
      background-color: #f2f2f2;
    }
 
+   
+
+   
+
 @media (max-width: 768px) {
+    #black .header nav {
+        background-color: rgb(44, 44, 44);
+      }
+    #black .hamburger-inner, #black .hamburger-inner::before, #black .hamburger-inner::after {
+        background-color: #fff;
+    }    
     #text {
         max-width: 100%;
     }

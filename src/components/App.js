@@ -99,10 +99,10 @@ class App extends Component {
         barTween = TweenMax.to(".bar .time", 0.5, { width: "0%" })
         barTween = TweenMax.to(".bar .time", 3, { width: "100%", delay: 1 })
         if (this.state.active === this.state.projects.length - 1) {
-          this.setState({offset: projects[0].offsetLeft * -1})
+          this.setState({ offset: projects[0].offsetLeft * -1 })
           this.setState({ active: 0 })
         } else {
-          this.setState({offset: projects[this.state.active + 1].offsetLeft * -1})
+          this.setState({ offset: projects[this.state.active + 1].offsetLeft * -1 })
           this.setState({ active: this.state.active + 1 })
         }
         about = TweenMax.to(".about-project", 0.1, { transform: "translateY(30px)" })
@@ -132,7 +132,7 @@ class App extends Component {
       setTimeout(() => {
         document.querySelector('.app').addEventListener('mousemove', cursorFollow)
         document.querySelector('.app').addEventListener('touchmove', cursorFollow)
-        this.setState({scrolling: true})
+        this.setState({ scrolling: true })
         cursorArea.style.display = 'block'
         // Adiciona o evento de movimentação dos cards
         cursorFollow(e)
@@ -165,45 +165,47 @@ class App extends Component {
 
     let eventUp = (e) => {
       setTimeout(() => {
-        this.setState({scrolling: false})
-        document.querySelector('.app').removeEventListener('mousemove', cursorFollow)
-        document.querySelector('.app').removeEventListener('touchmove', cursorFollow)
-        document.querySelector('.app').removeEventListener("mousemove", this.horizontalNavigation)
-        document.querySelector('.app').removeEventListener('touchmove', this.horizontalNavigation)
-        let projects = document.querySelectorAll('.project')
-        let wasActive = this.state.active
-        for (let i = 0; i < projects.length; i++) {
-          this.setState({ active: i })
-          if ((projects[i].offsetLeft + (this.state.projectWidth / 2)) * -1 < this.state.offset) {
-            this.state.offset = projects[i].offsetLeft * -1
+        if (this.refs.projectsRef) {
+          this.setState({ scrolling: false })
+          document.querySelector('.app').removeEventListener('mousemove', cursorFollow)
+          document.querySelector('.app').removeEventListener('touchmove', cursorFollow)
+          document.querySelector('.app').removeEventListener("mousemove", this.horizontalNavigation)
+          document.querySelector('.app').removeEventListener('touchmove', this.horizontalNavigation)
+          let projects = document.querySelectorAll('.project')
+          let wasActive = this.state.active
+          for (let i = 0; i < projects.length; i++) {
             this.setState({ active: i })
-            i = projects.length + 1
+            if ((projects[i].offsetLeft + (this.state.projectWidth / 2)) * -1 < this.state.offset) {
+              this.state.offset = projects[i].offsetLeft * -1
+              this.setState({ active: i })
+              i = projects.length + 1
+            }
           }
-        }
-        TweenMax.getAllTweens().reverse()
-        document.querySelector('#projects').style.transform = "translateX(" + this.state.offset + "px)"
-        t1.reverse()
-        t2 = TweenMax.to(".thumb-mask", 0.85, { width: "100%" })
-        t3.reverse()
-        TweenMax.to(".identity", 0.1, { display: 'none' })
-        t4.reverse()
-        t5.reverse()
-        t6.reverse()
-        space.reverse()
-        header.reverse()
-        grayScaleThumb.reverse()
-        traco = TweenMax.to(".traco", 1.5, { transform: "scale(0,1)" })
-        bottom.reverse()
-        cursoranim1.reverse()
-        cursor.classList.remove('active')
-        let content = document.querySelector('#content')
-        if (e.pageX > content.offsetLeft && e.pageX < content.offsetLeft + content.clientWidth && e.pageY > content.offsetTop && e.pageY < content.offsetLeft + content.clientHeight) {
-          if (wasActive === this.state.active) {
-            clearInterval(this.state.slides)
-            this.props.history.push(`/${this.state.projects[this.state.active].name}`)
+          TweenMax.getAllTweens().reverse()
+          this.refs.projectsRef.style.transform = "translateX(" + this.state.offset + "px)"
+          t1.reverse()
+          t2 = TweenMax.to(".thumb-mask", 0.85, { width: "100%" })
+          t3.reverse()
+          TweenMax.to(".identity", 0.1, { display: 'none' })
+          t4.reverse()
+          t5.reverse()
+          t6.reverse()
+          space.reverse()
+          header.reverse()
+          grayScaleThumb.reverse()
+          traco = TweenMax.to(".traco", 1.5, { transform: "scale(0,1)" })
+          bottom.reverse()
+          cursoranim1.reverse()
+          cursor.classList.remove('active')
+          let content = document.querySelector('#content')
+          if (e.pageX > content.offsetLeft && e.pageX < content.offsetLeft + content.clientWidth && e.pageY > content.offsetTop && e.pageY < content.offsetLeft + content.clientHeight) {
+            if (wasActive === this.state.active) {
+              clearInterval(this.state.slides)
+              this.props.history.push(`/${this.state.projects[this.state.active].name}`)
+            }
           }
+          setTimeout(() => { cursorArea.style.display = 'none' }, 800)
         }
-        setTimeout(() => { cursorArea.style.display = 'none' }, 800)
       }, 300)
     }
 
@@ -213,29 +215,31 @@ class App extends Component {
   }
 
   horizontalNavigation(e) {
-    if (this.state.totalWidth === 0) {
-      document.querySelectorAll('.project').forEach(project => {
-        this.setState({ totalWidth: this.state.totalWidth += this.state.projectWidth })
-      })
+    if(this.refs.projectsRef) {
+      if (this.state.totalWidth === 0) {
+        document.querySelectorAll('.project').forEach(project => {
+          this.setState({ totalWidth: this.state.totalWidth += this.state.projectWidth })
+        })
+      }
+  
+      let movementX;
+      if (e.changedTouches) {
+        movementX = e.changedTouches[0].clientX
+      } else {
+        movementX = e.movementX
+      }
+      // let percentMouse = e.pageX / document.querySelector('body').clientWidth
+      let mouseScreen = movementX * this.state.projects.length
+      // offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidthnpm 
+      if (this.state.offset + mouseScreen < 0 && this.state.offset + mouseScreen > (this.state.totalWidth * -1) + (this.state.projectWidth - 200)) {
+        this.setState({ offset: this.state.offset + mouseScreen })
+      }
+  
+      let bg = (this.state.offset / 100) * -1
+  
+      this.refs.projectsRef.style.transform = "translateX(" + this.state.offset + "px)"
+      document.querySelector('.app').style.backgroundPosition = +bg + "% center"
     }
-
-    let movementX;
-    if (e.changedTouches) {
-      movementX = e.changedTouches[0].clientX
-    } else {
-      movementX = e.movementX
-    }
-    // let percentMouse = e.pageX / document.querySelector('body').clientWidth
-    let mouseScreen = movementX * this.state.projects.length
-    // offset = percentMouse / 100 * totalWidth - percentMouse / 200 * document.querySelector('body').clientWidthnpm 
-    if (this.state.offset + mouseScreen < 0 && this.state.offset + mouseScreen > (this.state.totalWidth * -1) + (this.state.projectWidth - 200)) {
-      this.setState({ offset: this.state.offset + mouseScreen })
-    }
-
-    let bg = (this.state.offset / 100) * -1
-
-    document.querySelector('#projects').style.transform = "translateX(" + this.state.offset + "px)"
-    document.querySelector('.app').style.backgroundPosition = +bg + "% center"
   }
 
   componentDidMount() {
@@ -247,7 +251,7 @@ class App extends Component {
       <div className="app">
         <Header voltar={false}></Header>
         <div className="container" id="content">
-          <div id="projects">
+          <div id="projects" ref="projectsRef">
             {this.state.projects.map((project, i) => {
               return (
                 <div className={"project " + (i > 0 ? 'others' : 'first')} key={i}>
@@ -266,10 +270,10 @@ class App extends Component {
           </div>
           <div className="bottom">
             <div className="about-overlay">
-            <div className="about-project">
-              <span className="type">{this.state.projects[this.state.active].type}</span> &nbsp;&nbsp;.&nbsp;&nbsp;
+              <div className="about-project">
+                <span className="type">{this.state.projects[this.state.active].type}</span> &nbsp;&nbsp;.&nbsp;&nbsp;
               <span className="when"> {this.state.projects[this.state.active].date}</span>
-            </div>
+              </div>
             </div>
             <div className="slide">
               <div>
