@@ -76,7 +76,7 @@
 }
 
 .header #logo {
-  min-width: 60px;
+  min-width: 80px;
   width: 100%;
   max-width: 220px;
 }
@@ -424,10 +424,6 @@ header #logo .cls-2{
 }
 
 @media (max-width: 1180px) {
-  .header .container {
-    flex-wrap: wrap;
-  }
-
   .header .container a#voltar {
     display: none;
   }

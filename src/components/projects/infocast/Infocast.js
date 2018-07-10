@@ -17,7 +17,7 @@ class Infocast extends Component {
     }
   }
   componentWillMount() {
-    fetch('https://www.behance.net/v2/projects/67526709?api_key=OgcEKxgXnxNcHihcPqcTeK0dY7pAYwik')
+    fetch('https://cors-anywhere.herokuapp.com/https://www.behance.net/v2/projects/67526709?api_key=OgcEKxgXnxNcHihcPqcTeK0dY7pAYwik')
     .then(response => {
       return response.json()
     })
