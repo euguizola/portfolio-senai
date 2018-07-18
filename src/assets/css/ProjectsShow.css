@@ -1,0 +1,53 @@
+#jobs #projects {
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#jobs #projects .project {
+    max-width: 202px;
+    max-height: 158px;
+    min-width: unset;
+    margin-left: unset;
+    margin: 10px;
+}
+
+#jobs #projects .project:hover {
+    cursor: pointer;
+}
+
+#jobs #projects .project .identity{
+    top: 0;
+    left: 0;
+    display: block;
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+
+#jobs #projects .project h3 {
+    color: #999;
+    margin: 7px 0;
+    font-weight: normal;
+}
+
+#jobs #projects .project:hover .identity{
+    opacity: 1;
+    left: 0;
+}
+
+#jobs #projects .project .identity h1 {
+    font-size: 4vw;
+    transform: translateX(-15px);
+}
+
+
+#jobs #projects .project:hover .thumb-mask{
+    filter: grayscale(1) brightness(1.5) opacity(0.8) saturate(0.6) blur(0.8px);
+    transition: all 0.6s ease;
+}
+
+
+#jobs #projects .project .thumb{
+    width: 202px;
+    height: 158px;
+}

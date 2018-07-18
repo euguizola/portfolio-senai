@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Sobre from './components/Sobre'
 import Contato from './components/Contato'
+import Projetos from './components/Projetos'
 
 // Pages
 import Infocast from './components/projects/infocast/Infocast'
@@ -22,6 +23,7 @@ ReactDOM.render(
                 <CSSTransition classNames="fade" timeout={300} key={location.key}>
                     <Switch location={location}>
                         <Route exact path="/" component={App} />
+                        <Route exact path="/projetos" component={Projetos} />
                         <Route exact path="/sobre" component={Sobre} />
                         <Route exact path="/contato" component={Contato} />
                         {/* PROJETOS */}

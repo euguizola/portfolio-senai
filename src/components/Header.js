@@ -12,11 +12,10 @@ class Header extends Component {
     this.menuChange = this.menuChange.bind(this)
   }
   menuChange() {
-    console.log(this.state.menuExpand)
     this.setState({menuExpand: !this.state.menuExpand})
   }
   render() {
-    let voltar = this.props.voltar ? <NavLink to="/" activeClassName="current" id="voltar">voltar</NavLink> : ''
+    let voltar = this.props.voltar ? <NavLink to="/projetos" activeClassName="current" id="voltar">voltar</NavLink> : ''
     return (
       <header className="header">
         <div className="container">
@@ -30,7 +29,8 @@ class Header extends Component {
             </span>
           </button>
           <nav className={this.state.menuExpand ? 'active' : ''}>
-            <NavLink exact to="/" activeClassName="current">Trabalhos<span className="selector"></span></NavLink>
+            <NavLink exact to="/" activeClassName="current">Inicio<span className="selector"></span></NavLink>
+            <NavLink to="/projetos" activeClassName="current">Projetos<span className="selector"></span></NavLink>
             <NavLink to="/sobre" activeClassName="current">Sobre<span className="selector"></span></NavLink>
             <NavLink to="/contato" activeClassName="current">Contato<span className="selector"></span></NavLink>
             {/* <i className="icon"><img src={iconLupa} alt="lupa icone" /></i> */}
