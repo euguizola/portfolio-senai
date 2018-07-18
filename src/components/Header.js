@@ -10,9 +10,16 @@ class Header extends Component {
       menuExpand: false
     }
     this.menuChange = this.menuChange.bind(this)
+    this.scrolled = this.scrolled.bind(this)
   }
   menuChange() {
     this.setState({menuExpand: !this.state.menuExpand})
+  }
+  scrolled(e) {
+    console.log(e)
+  }
+  componentDidMount() {
+    window.addEventListener('scroll', this.scrolled)
   }
   render() {
     let voltar = this.props.voltar ? <NavLink to="/projetos" activeClassName="current" id="voltar">voltar</NavLink> : ''

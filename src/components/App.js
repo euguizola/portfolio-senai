@@ -21,18 +21,20 @@ class App extends Component {
       scrolling: false,
       inClone: false,
       tweens: [],
-      projects: projects
+      projects: projects,
+      randomProjects: []
     }
     this.setupAnimations = this.setupAnimations.bind(this)
     this.slide = this.slide.bind(this)
     this.getProjects = this.getProjects.bind(this)
+    this.setRandomProjects = this.setRandomProjects.bind(this)
   }
 
   setupAnimations() {
     this.setState({ projectWidth: document.querySelectorAll('.project')[0].clientWidth + 40 })
     document.querySelectorAll('.project').forEach(p => {
       p.addEventListener('click', () => {
-        this.props.history.push(`/${this.state.projects[this.state.active].name}`)
+        this.props.history.push(`/${this.state.randomProjects[this.state.active].name}`)
       })
     })
     new TweenMax(this.refs.timeRef, 3.5, { width: '100%', delay: 0.5 })
@@ -43,24 +45,31 @@ class App extends Component {
     let projects = document.querySelectorAll('.project')
     new TweenMax(this.refs.timeRef, 0.5, { width: '0%' })
     new TweenMax(this.refs.timeRef, 3.5, { width: '100%', delay: 0.5 })
-    new TweenMax(this.refs.aboutRef, 0.5, {marginTop: '50px'})
-    if (this.state.active === this.state.projects.length - 1) {
+    new TweenMax(this.refs.aboutRef, 0.5, { marginTop: '50px' })
+    if (this.state.active === this.state.randomProjects.length - 1) {
       this.setState({ active: 0 })
     } else {
       this.setState({ active: this.state.active + 1 })
     }
     this.setState({ offset: projects[this.state.active].offsetLeft * -1 })
 
-    new TweenMax(this.refs.aboutRef, 0.5, {marginTop: '0px', delay: 0.6})
+    new TweenMax(this.refs.aboutRef, 0.5, { marginTop: '0px', delay: 0.6 })
     new TweenMax(this.refs.projectsRef, 0.5, { transform: `translateX(${this.state.offset}px)` })
+
+    let bg = (this.state.active * 100) / (this.state.randomProjects.length)
+    document.querySelector('.app').style.backgroundPosition = +bg + "% center"
   }
 
   componentDidMount() {
     this.setupAnimations()
   }
 
+  componentWillMount() {
+    this.setRandomProjects()
+  }
+
   getProjects(className) {
-    return this.state.projects.map((project, i) => {
+    return this.state.randomProjects.map((project, i) => {
       return (
         <div className={`project ${className} ` + (i > 0 ? 'others' : 'first')} key={i} ref="projectRef">
           <div className="thumb-mask">
@@ -75,6 +84,18 @@ class App extends Component {
         </div>
       )
     })
+  } 
+
+  setRandomProjects() {
+    let randoms = []
+    for(let i = 0 ; i  < 5 ; i++){
+      let math = Math.floor(Math.random()*this.state.projects.length)
+      while(randoms.includes(this.state.projects[math])) {
+        math = Math.floor(Math.random()*this.state.projects.length)
+      }
+      randoms.push(this.state.projects[math])
+    }
+    this.setState({randomProjects: randoms})
   }
 
   render() {
@@ -98,7 +119,7 @@ class App extends Component {
                 <span className="bar" ref="barRef">
                   <span className="time" ref="timeRef"></span>
                 </span>
-                <span className="total">{this.state.projects.length}</span>
+                <span className="total">{this.state.randomProjects.length}</span>
               </div>
               {/* <span id="action">clique e arraste</span> */}
             </div>

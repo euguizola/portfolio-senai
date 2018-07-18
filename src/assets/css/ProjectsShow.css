@@ -1,26 +1,43 @@
 #jobs #projects {
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 #jobs #projects .project {
-    max-width: 202px;
-    max-height: 158px;
+    max-width: 70%;
     min-width: unset;
     margin-left: unset;
-    margin: 10px;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    max-height: 200px;
+    transition: all 1s ease;
+}
+
+#jobs #projects .project .thumb-mask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    max-height: 200px;
+    height: 200px;
+    margin: 10px 0;
+}
+
+#jobs #projects .project .thumb-mask img {
+    position: absolute;
 }
 
 #jobs #projects .project:hover {
     cursor: pointer;
+    width: 100%;
 }
 
 #jobs #projects .project .identity{
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 10px;
     display: block;
     opacity: 0;
     transition: all 1s ease;
+    padding-left: 10px;
 }
 
 
@@ -32,17 +49,30 @@
 
 #jobs #projects .project:hover .identity{
     opacity: 1;
-    left: 0;
+    left: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 #jobs #projects .project .identity h1 {
-    font-size: 4vw;
-    transform: translateX(-15px);
+    font-size: 3vw;
+    transform: unset;
+    left: 10px;
+}
+
+#jobs #projects .project .identity h2 {
+    font-size: 2vw;
+    transform: unset;
+    padding: 0;
+    color: white;
+    left: 10px;
 }
 
 
 #jobs #projects .project:hover .thumb-mask{
-    filter: grayscale(1) brightness(1.5) opacity(0.8) saturate(0.6) blur(0.8px);
+    filter: grayscale(1) brightness(1.5) opacity(0.3) saturate(0.6) blur(0.8px);
     transition: all 0.6s ease;
 }
 

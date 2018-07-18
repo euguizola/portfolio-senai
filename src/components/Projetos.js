@@ -22,25 +22,93 @@ class Projetos extends Component {
       projects: projects
     }
     this.getProjects = this.getProjects.bind(this)
+    this.shuffle = this.shuffle.bind(this)
+    this.setupAnimations = this.setupAnimations.bind(this)
   }
+
+  componentWillMount() {
+    this.setState({ projects: this.shuffle(this.state.projects) })
+  }
+
   componentDidMount() {
+    this.setupAnimations()
   }
+
   getProjects(className) {
+    let second = true
+    let width = 100
+    let situations = []
     return this.state.projects.map((project, i) => {
+      second = !second
+      if (!second) {
+        let math = Math.floor(Math.random() * (3 - 1) + 1)
+        while (situations[situations.length - 1] === math) {
+          math = Math.floor(Math.random() * (3 - 1) + 1)
+        }
+        situations.push(math)
+        switch (math) {
+          case 1:
+            width = 50
+            break;
+          case 2:
+            width = 70
+            break;
+          case 3:
+            width = 30
+            break;
+        }
+      } else {
+        width = 100 - width
+      }
       return (
-        <div className={`project ${className} ` + (i > 0 ? 'others' : 'first')} key={i} ref="projectRef" onClick={()=>{this.props.history.push(`/${project.name}`)}}>
+        <div style={{ width: `${width}%` }} className={`project ${className} ` + (second ? 'second' : 'first')} key={i} ref="projectRef" onClick={() => { this.props.history.push(`/${project.name}`) }}>
           <div className="thumb-mask">
-            <div className="thumb" style={{ backgroundImage: "url(" + project.thumbnail + ")" }}></div>
+            <img src={project.picture} alt={project.name} />
           </div>
-          <h3>{project.name}</h3>
           <div className="identity">
             <span className="traco"></span>
             <h1>{project.date}</h1>
+            <h2>{project.name}</h2>
           </div>
         </div>
       )
     })
   }
+
+  setupAnimations() {
+    document.querySelectorAll('.project').forEach(p => {
+      p.addEventListener('mouseover', e => {
+        if (p.classList.contains('first')) {
+          p.nextSibling.style.width = '30%'
+        } else {
+          p.previousSibling.style.width = '30%'
+        }
+        p.style.width = '70%'
+      })
+    })
+  }
+
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
+
+
   render() {
     return (
       <div className="app" id="black">

@@ -6,6 +6,7 @@ import uplab from '../assets/images/projects/uplab.png'
 import educar from '../assets/images/projects/educar.jpg'
 import infocast from '../assets/images/projects/infocast.jpg'
 import lean from '../assets/images/projects/lean.jpg'
+import lumen from '../assets/images/projects/lumen.jpg'
 
 // Thumbs
 import thumbEcub from '../assets/images/projects/thumbs/ecub.jpg'
@@ -49,6 +50,13 @@ const Projects = [
       type: "Identidade Visual",
       date: "2016",
       thumbnail: thumbEducar
+    },
+    {
+      name: "lumen",
+      picture: lumen,
+      type: "Identidade Visual",
+      date: "2018",
+      thumbnail: lumen
     }
   ]
 

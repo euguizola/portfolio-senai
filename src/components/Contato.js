@@ -32,18 +32,18 @@ class Contato extends Component {
         <div className="container" id="contact">
           <div id="about">
             <div id="text">
-              <h2>nosso . contato</h2>
+              <h2>contato</h2>
               <ul>
                 <li>
-                  <span>nosso . telefone</span>
+                  <span>telefone</span>
                   (11) 3273-5000
               </li>
                 <li>
-                  <span>nosso . endereço</span>
+                  <span>endereço</span>
                   Alameda Barão de Limeira, 539 - Santa Cecilia, São Paulo - SP
                   </li>
                 <li>
-                  <span>nosso . cep</span> 01202-001
+                  <span>cep</span> 01202-001
                   </li>
               </ul>
             </div>
