@@ -20,10 +20,18 @@
     max-height: 200px;
     height: 200px;
     margin: 10px 0;
+    position: relative;
 }
 
-#jobs #projects .project .thumb-mask img {
+#jobs #projects .project .thumb-mask .bg {
     position: absolute;
+    z-index: 9;
+}
+
+#jobs #projects .project .thumb-mask .logo {
+    max-width: 100%;
+    z-index: 10;
+    margin: 0 20px;
 }
 
 #jobs #projects .project:hover {

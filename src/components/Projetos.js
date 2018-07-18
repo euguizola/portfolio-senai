@@ -63,7 +63,8 @@ class Projetos extends Component {
       return (
         <div style={{ width: `${width}%` }} className={`project ${className} ` + (second ? 'second' : 'first')} key={i} ref="projectRef" onClick={() => { this.props.history.push(`/${project.name}`) }}>
           <div className="thumb-mask">
-            <img src={project.picture} alt={project.name} />
+            <img src={project.thumbnail} alt={project.name} className="bg"/>
+            <img src={project.logo} alt={project.name} className="logo"/>
           </div>
           <div className="identity">
             <span className="traco"></span>
