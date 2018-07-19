@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/App.css';
 import '../assets/css/Projects.css';
 import Header from './Header';
+import { Link } from 'react-router-dom'
 
 import TweenMax from 'gsap/src/uncompressed/TweenMax';
 import TimelineMax from 'gsap/src/uncompressed/TimelineMax';
@@ -22,7 +23,8 @@ class App extends Component {
       inClone: false,
       tweens: [],
       projects: projects,
-      randomProjects: []
+      randomProjects: [],
+      slidesInterval: {}
     }
     this.setupAnimations = this.setupAnimations.bind(this)
     this.slide = this.slide.bind(this)
@@ -38,7 +40,7 @@ class App extends Component {
       })
     })
     new TweenMax(this.refs.timeRef, 3.5, { width: '100%', delay: 0.5 })
-    setInterval(this.slide, 4000)
+    this.setState({slidesInterval: setInterval(this.slide, 4000)})
   }
 
   slide() {
@@ -66,6 +68,10 @@ class App extends Component {
 
   componentWillMount() {
     this.setRandomProjects()
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.slidesInterval)
   }
 
   getProjects(className) {
@@ -121,7 +127,7 @@ class App extends Component {
                 </span>
                 <span className="total">{this.state.randomProjects.length}</span>
               </div>
-              {/* <span id="action">clique e arraste</span> */}
+              <Link to={'/projetos'}><span id="action"><span>+</span> projetos</span></Link>
             </div>
           </div>
         </div>

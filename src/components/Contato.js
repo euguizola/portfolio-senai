@@ -29,7 +29,7 @@ class Contato extends Component {
     return (
       <div className="app" id="black">
         <Header voltar={true}></Header>
-        <div className="container" id="contact">
+        <div className="container contact" id="content">
           <div id="about">
             <div id="text">
               <h2>contato</h2>

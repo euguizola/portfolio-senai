@@ -7,7 +7,8 @@ class Header extends Component {
   constructor() {
     super()
     this.state = {
-      menuExpand: false
+      menuExpand: false,
+      menuFixed: false,
     }
     this.menuChange = this.menuChange.bind(this)
     this.scrolled = this.scrolled.bind(this)
@@ -16,7 +17,11 @@ class Header extends Component {
     this.setState({menuExpand: !this.state.menuExpand})
   }
   scrolled(e) {
-    console.log(e)
+    if(window.pageYOffset > 100) {
+      this.setState({menuFixed: true})
+    } else if(this.state.menuFixed && window.pageYOffset <= 100) {
+      this.setState({menuFixed: false})
+    }
   }
   componentDidMount() {
     window.addEventListener('scroll', this.scrolled)
@@ -24,7 +29,7 @@ class Header extends Component {
   render() {
     let voltar = this.props.voltar ? <NavLink to="/projetos" activeClassName="current" id="voltar">voltar</NavLink> : ''
     return (
-      <header className="header">
+      <header className={'header '+ (this.state.menuFixed ? 'fixed' : '')} ref="header">
         <div className="container">
           {voltar}
           <NavLink to="/" id="logo">

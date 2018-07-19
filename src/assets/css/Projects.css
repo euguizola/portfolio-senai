@@ -106,6 +106,7 @@
     display: flex;
     justify-content: space-between;
     overflow: hidden;
+    flex-wrap: wrap;
   }
   
   .bottom .about-project{
@@ -139,6 +140,12 @@
       margin-left: -20%;
       transform: translateY(60px);
       font-weight: 700;
+    }
+
+    #jobs #projects .project {
+      min-width: 100%;
+      max-width: 100%!important;
+      width: 100%!important;
     }
   
   }

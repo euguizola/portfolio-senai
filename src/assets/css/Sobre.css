@@ -4,6 +4,10 @@
     min-height: 50vh;
 }
 
+#black header.fixed {
+    background-color: #1a1a1a;
+}
+
 #text {
     max-width: 50%;
 }

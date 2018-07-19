@@ -9,6 +9,24 @@
   }
 }
 
+button {
+  outline: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #808080;
+}
+
+*::selection, *::-moz-selection {
+  background-color: #ccc;
+  color: black;
+}
+
 /* *{
   will-change: all;
 } */
@@ -16,6 +34,16 @@
 .header {
   width: 100%;
   padding: 5% 0 60px 0;
+  position: fixed;
+  z-index: 9999;
+  transition: all 0.6s ease;
+}
+
+.header.fixed {
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  background-color: #f8f8f8;
 }
 
 .header .container {
@@ -79,6 +107,7 @@
   min-width: 80px;
   width: 100%;
   max-width: 220px;
+  padding-top: 5px;
 }
 
 .header #logo .cls-1{
@@ -109,6 +138,10 @@ header #logo .cls-2{
   stroke-width: 1px;
 }
 
+#content {
+  margin-top: calc(10% + 50px);
+}
+
 .container {
   max-width: 1280px;
   width: 100%;
@@ -120,10 +153,12 @@ header #logo .cls-2{
 .app {
   background-image: url("../images/bg.jpg");
   background-position: 0 center;
-  height: 100vh;
   width: 100vw;
+  min-height: 100vh;
   transition: all 0.6s linear;
-  overflow: hidden;
+  overflow-x: hidden;
+  background-repeat: no-repeat;
+  background-color: white;
 }
 
 .slide {
@@ -133,7 +168,9 @@ header #logo .cls-2{
   max-width: 380px;
   padding-left: 10px;
   width: 100%;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .slide div{
   width: 100%;
@@ -141,12 +178,27 @@ header #logo .cls-2{
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  max-width: 250px;
+  flex: 2;
+  min-width: 200px;
+  padding-right: 20px;
 }
 
 .slide #action {
-  font-size: 14px;
-  width: 100%;
-  text-align: left;
+  font-size: 18px;
+  width: auto;
+  text-align: center;
+  word-wrap: normal;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 120px;
+}
+
+.slide #action span{
+  font-size: 22px;
+  padding-right: 5px;
 }
 
 .slide .total {
@@ -240,6 +292,7 @@ header #logo .cls-2{
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: calc(10% + 50px);
 }
 
 .about-overlay {
@@ -281,6 +334,7 @@ header #logo .cls-2{
 .app#black {
   background-image: url("../images/bg-black.jpg");
   overflow-y: auto;
+  background-color: black;
 }
 
 #black .header #logo .cls-1{
@@ -319,7 +373,7 @@ header #logo .cls-2{
   background-color: #f2f2f2;
 }
 
-#contact ul {
+.contact ul {
   list-style: none;
   padding: 10px 0;
   margin: 0;
@@ -327,13 +381,13 @@ header #logo .cls-2{
   font-size: 24px;
 }
 
-#contact ul li {
+.contact ul li {
   display: flex;
   flex-direction: column;
   margin: 10px 0;
 }
 
-#contact ul span{
+.contact ul span{
   padding: 2px 0;
   color: #b3b3b3;
   font-size: 16px;
@@ -344,6 +398,11 @@ header #logo .cls-2{
 }
 
 @media (max-width: 768px) {
+
+  .container {
+    padding: 0 10px;
+  }
+
   .project .identity{
     position: absolute;
     top: 0vh;
@@ -386,13 +445,13 @@ header #logo .cls-2{
     justify-content: left;
     position: fixed;
     height: 100vh;
-    width: 50%;
+    width: 100vw;
     background-color: #fbfbfb;
     z-index: 999;
     padding-top: 20%;
     box-shadow: -3px -3px 5px rgba(0,0,0,0.15);
     top: 0;
-    right: -50%;
+    right: -100vw;
     transition: right 0.3s linear;
     will-change: right;
   }
@@ -421,6 +480,10 @@ header #logo .cls-2{
   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
     background-color: #000;
   }  
+
+  .slide #action {
+    padding-left: unset;
+  }
 }
 
 @media (max-width: 1180px) {

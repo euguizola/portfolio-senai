@@ -33,10 +33,12 @@ class Sobre extends Component {
     this.setupAnimations = this.setupAnimations.bind(this)
     this.scrollFunction = this.scrollFunction.bind(this)
   }
+
   setupAnimations() {
     TweenMax.to(".bar .time", 1, { width: "100%" })
-    window.addEventListener('wheel', this.scrollFunction)
+    this.refs.content.addEventListener('click', this.scrollFunction)
   }
+
   scrollFunction() {
     var barTween
     var about
@@ -62,13 +64,13 @@ class Sobre extends Component {
     this.setupAnimations()
   }
   componentWillUnmount() {
-    window.removeEventListener('wheel', this.scrollFunction)
+    this.refs.content.removeEventListener('click', this.scrollFunction)
   }
   render() {
     return (
       <div className="app" id="black">
         <Header voltar={true}></Header>
-        <div className="container" id="content">
+        <div className="container" id="content" ref="content">
           <div id="about">
             <div id="text">
               <h2>{this.state.texts[this.state.active].title}</h2>
@@ -86,7 +88,7 @@ class Sobre extends Component {
               </span>
               <span className="total">{this.state.texts.length}</span>
               </div>
-              <span id="action">role a página</span>
+              <span id="action">clique</span>
             </div>
           </div>
         </div>

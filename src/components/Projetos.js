@@ -41,9 +41,9 @@ class Projetos extends Component {
     return this.state.projects.map((project, i) => {
       second = !second
       if (!second) {
-        let math = Math.floor(Math.random() * (3 - 1) + 1)
+        let math = Math.floor(Math.random() * (3 - 0) + 1)
         while (situations[situations.length - 1] === math) {
-          math = Math.floor(Math.random() * (3 - 1) + 1)
+          math = Math.floor(Math.random() * (3 - 0) + 1)
         }
         situations.push(math)
         switch (math) {
@@ -63,8 +63,8 @@ class Projetos extends Component {
       return (
         <div style={{ width: `${width}%` }} className={`project ${className} ` + (second ? 'second' : 'first')} key={i} ref="projectRef" onClick={() => { this.props.history.push(`/${project.name}`) }}>
           <div className="thumb-mask">
-            <img src={project.thumbnail} alt={project.name} className="bg"/>
-            <img src={project.logo} alt={project.name} className="logo"/>
+            <img src={project.thumbnail} alt={project.name} className="bg" />
+            <img src={project.logo} alt={project.name} className="logo" />
           </div>
           <div className="identity">
             <span className="traco"></span>
