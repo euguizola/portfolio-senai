@@ -81,13 +81,13 @@ class Sobre extends Component {
           </div>
           <div className="bottom">
           <div className="slide">
-              <div>
+              {/* <div>
               <span className="current">{this.state.active + 1}</span>
               <span className="bar">
                 <span className="time"></span>
               </span>
               <span className="total">{this.state.texts.length}</span>
-              </div>
+              </div> */}
               <span id="action">clique</span>
             </div>
           </div>

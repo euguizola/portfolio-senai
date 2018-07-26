@@ -36,32 +36,38 @@ class Projetos extends Component {
 
   getProjects(className) {
     let second = true
+    let impar = false
     let width = 100
     let situations = []
     return this.state.projects.map((project, i) => {
       second = !second
       if (!second) {
-        let math = Math.floor(Math.random() * (3 - 0) + 1)
-        while (situations[situations.length - 1] === math) {
-          math = Math.floor(Math.random() * (3 - 0) + 1)
-        }
-        situations.push(math)
-        switch (math) {
-          case 1:
-            width = 50
-            break;
-          case 2:
-            width = 70
-            break;
-          case 3:
-            width = 30
-            break;
+        if (i === (this.state.projects.length - 1) && (this.state.projects.length % 2) != 0) {
+          width = 100
+          impar = true
+        } else {
+          let math = Math.floor(Math.random() * (3 - 0) + 1)
+          while (situations[situations.length - 1] === math) {
+            math = Math.floor(Math.random() * (3 - 0) + 1)
+          }
+          situations.push(math)
+          switch (math) {
+            case 1:
+              width = 50
+              break;
+            case 2:
+              width = 70
+              break;
+            case 3:
+              width = 30
+              break;
+          }
         }
       } else {
         width = 100 - width
       }
       return (
-        <div style={{ width: `${width}%` }} className={`project ${className} ` + (second ? 'second' : 'first')} key={i} ref="projectRef" onClick={() => { this.props.history.push(`/${project.name}`) }}>
+        <div style={{ width: `${width}%` }} className={`project ${className} ` + (second ? 'second' : 'first') + (impar ? ' impar' : '')} key={i} ref="projectRef" onClick={() => { this.props.history.push(`/${project.name}`) }}>
           <div className="thumb-mask">
             <img src={project.thumbnail} alt={project.name} className="bg" />
             <img src={project.logo} alt={project.name} className="logo" />
@@ -78,14 +84,16 @@ class Projetos extends Component {
 
   setupAnimations() {
     document.querySelectorAll('.project').forEach(p => {
-      p.addEventListener('mouseover', e => {
-        if (p.classList.contains('first')) {
-          p.nextSibling.style.width = '30%'
-        } else {
-          p.previousSibling.style.width = '30%'
-        }
-        p.style.width = '70%'
-      })
+      if (!p.classList.contains('impar')) {
+        p.addEventListener('mouseover', e => {
+          if (p.classList.contains('first')) {
+            p.nextSibling.style.width = '30%'
+          } else {
+            p.previousSibling.style.width = '30%'
+          }
+          p.style.width = '70%'
+        })
+      }
     })
   }
 

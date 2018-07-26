@@ -2,8 +2,8 @@
     display: flex;
     user-select: none;
     padding-bottom: 15px;
-    transition: all 0.6s ease-out;
-    transform: translateX(-4px)
+    transition: all 1s ease-out;
+    transform: translateX(0px);
   }
   
   #projects .project {
@@ -11,6 +11,7 @@
     min-width: 100%;
     max-width: 1280px;
     margin-left: 15%;
+    display: flex;
   }
 
   #projects .project:hover {
@@ -43,17 +44,65 @@
     width: 100%;
     overflow: hidden;
     height: 60vh;
-    display: block;
+    display: flex;
     background-size: cover;
     background-repeat: no-repeat;
     z-index: 1;
     background-position: center center;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+
+  .project .thumb .logo {
+    max-width: 100%;
+    align-self: center;
+    display: block;
   }
   
   .project {
     position: relative;
   }
+
+  .project:hover .arrow {
+    opacity: 1;
+  }
+
+  .project .arrow {
+    position: absolute;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100%;
+    top: 0;
+    width: 10%;
+    transition: all 0.5s ease;
+    opacity: 0;
+  }
+
+  .project .arrow:hover {
+    cursor: pointer;
+  }
+
+  .project .arrow.left {
+    left: 0;
+    z-index: 1;
+    background: linear-gradient(to left, rgba(255,0,0,0), rgba(0,0,0,0.1));
+  }
+
+  .project .arrow.right {
+    right: 0;
+    background: linear-gradient(to right, rgba(255,0,0,0), rgba(0,0,0,0.1));
+  }
   
+  .arrow.left:hover {
+    background: linear-gradient(to left, rgba(255,0,0,0), rgba(0,0,0,0.2));
+  }
+
+ .arrow.right:hover {
+    background: linear-gradient(to right, rgba(255,0,0,0), rgba(0,0,0,0.2));
+  }
+
   .project .identity{
     position: absolute;
     top: -50vh;
@@ -100,7 +149,7 @@
   }
   
   .bottom {
-    font-size: 22px;
+    font-size: calc(0.5vw + 16px);
     margin-top: 20px;
     font-weight: 600;
     display: flex;
@@ -147,5 +196,17 @@
       max-width: 100%!important;
       width: 100%!important;
     }
+
   
+  }
+
+  @media (max-width: 450px) {
+    .bottom {
+      flex-direction: column;
+    }
+
+    .bottom .slide {
+      justify-content: flex-start;
+      text-align: left;
+    }
   }

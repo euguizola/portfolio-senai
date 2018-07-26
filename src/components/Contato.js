@@ -48,8 +48,7 @@ class Contato extends Component {
               </ul>
             </div>
           </div>
-          <div id="map">
-          </div>
+          <div id="map"></div>
         </div>
       </div>
     );

@@ -37,6 +37,9 @@ a:hover {
   position: fixed;
   z-index: 9999;
   transition: all 0.6s ease;
+  display: flex;
+  justify-content: center;
+  left: 0;
 }
 
 .header.fixed {
@@ -62,12 +65,16 @@ a:hover {
 
 .header nav {
   text-align: right;
+  flex: 2;
+  justify-content: space-between;
+  display: flex;
+  max-width: 500px;
 }
 
 .header nav a {
   color: #808080;
   text-decoration: none;
-  padding: 0 20px;
+  padding-left: 30px;
   text-align: right;
   display: inline-flex;
   flex-direction: column;
@@ -106,7 +113,7 @@ a:hover {
 .header #logo {
   min-width: 80px;
   width: 100%;
-  max-width: 220px;
+  max-width: calc(1vw + 220px);
   padding-top: 5px;
 }
 
@@ -146,7 +153,6 @@ header #logo .cls-2{
   max-width: 1280px;
   width: 100%;
   padding: 0 40px;
-  margin: 0 auto;
   overflow-x: visible;
 }
 
@@ -159,17 +165,19 @@ header #logo .cls-2{
   overflow-x: hidden;
   background-repeat: no-repeat;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .slide {
   flex: 2;
   display: inline-flex;
   align-items: center;
-  max-width: 380px;
-  padding-left: 10px;
+  max-width: 250px;
   width: 100%;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-wrap: wrap;
 }
 .slide div{
@@ -180,24 +188,23 @@ header #logo .cls-2{
   align-items: center;
   max-width: 250px;
   flex: 2;
-  min-width: 200px;
+  min-width: 150px;
   padding-right: 20px;
 }
 
 .slide #action {
-  font-size: 18px;
+  font-size: calc(0.5vw + 16px);
   width: auto;
-  text-align: center;
+  text-align: right;
   word-wrap: normal;
   flex: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   max-width: 120px;
 }
 
 .slide #action span{
-  font-size: 22px;
   padding-right: 5px;
 }
 
@@ -298,6 +305,7 @@ header #logo .cls-2{
 .about-overlay {
   max-height: 30px;
   overflow: hidden;
+  padding-right: 20px;
 }
 
 #about h2 {
@@ -395,12 +403,29 @@ header #logo .cls-2{
 
 .hamburger {
   display: none;
+  padding: unset;
+}
+
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+  width: 36px;
+  height: 3px;
 }
 
 @media (max-width: 768px) {
 
+  .project .arrow {
+    display: none;
+  }
+
+  .header #logo {
+    min-width: 80px;
+    width: 100%;
+    max-width: calc(2vw + 160px);
+    padding-top: 5px;
+  }
+
   .container {
-    padding: 0 10px;
+    padding: 0 20px;
   }
 
   .project .identity{
@@ -414,7 +439,7 @@ header #logo .cls-2{
   }
 
   .project .identity h1 {
-    font-size: 30vh;
+    font-size: calc(30vh + 16px);
     padding: 0;
     margin: 0;
     color: transparent;
@@ -451,7 +476,7 @@ header #logo .cls-2{
     padding-top: 20%;
     box-shadow: -3px -3px 5px rgba(0,0,0,0.15);
     top: 0;
-    right: -100vw;
+    right: calc(-100vw + -5px);
     transition: right 0.3s linear;
     will-change: right;
   }

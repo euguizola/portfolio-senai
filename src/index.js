@@ -16,6 +16,7 @@ import Lean from './components/projects/lean/Lean'
 import Code from './components/projects/code/Code'
 import Ecub from './components/projects/ecub/Ecub'
 import Lumen from './components/projects/lumen/Lumen'
+import Baliza from './components/projects/baliza/Baliza'
 
 ReactDOM.render(
     <Router>
@@ -34,6 +35,7 @@ ReactDOM.render(
                         <Route exact path="/code[xp]" component={Code} />
                         <Route exact path="/e.cub" component={Ecub} />
                         <Route exact path="/lumen" component={Lumen} />
+                        <Route exact path="/baliza" component={Baliza} />
                     </Switch>
                 </CSSTransition>
             </TransitionGroup>
