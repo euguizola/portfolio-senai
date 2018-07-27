@@ -159,8 +159,8 @@ class App extends Component {
   }
 
   nextProject(e) {
-    e.stopPropagation()
     e.preventDefault()
+    e.stopPropagation()
     if (this.state.active < this.state.randomProjects.length - 1 && !this.state.scrollingTouch) {
       clearInterval(this.state.slidesInterval)
       this.setState({
@@ -173,8 +173,8 @@ class App extends Component {
   }
 
   previousProject(e) {
-    e.stopPropagation()
     e.preventDefault()
+    e.stopPropagation()
     if (this.state.active > 0 && !this.state.scrollingTouch) {
       clearInterval(this.state.slidesInterval)
       // this.setState({ active: this.state.active - 1 })
@@ -189,7 +189,7 @@ class App extends Component {
   getProjects(className) {
     return this.state.randomProjects.map((project, i) => {
       return (
-        <div className={`project ${className} ` + (i > 0 ? 'others' : 'first')} key={i} ref="projectRef">
+        <div className={`project ${className} ` + (i > 0 ? 'others' : 'first')} key={i} ref="projectRef" onClick={() => { this.props.history.push(`/${project.name}`) }}>
           {
             i > 0 ? <button className="arrow left" onClick={this.previousProject}>
               <img src={leftArrow} />

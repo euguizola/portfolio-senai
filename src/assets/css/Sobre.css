@@ -1,7 +1,10 @@
 #black #about {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     min-height: 50vh;
+    flex: 1;
+    min-width: 320px;
+    flex-direction: column;
 }
 
 #black header.fixed {
